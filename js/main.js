@@ -23,6 +23,9 @@ function getDataFromApi(page) {
         success: function (data) {
             $('table > tbody').empty();
             $('.box-loading').remove();
+            if ($(".box-title > h3 > .total-user").children().length > 0) {
+                $(".box-title > h3 > .total-user").empty();
+            }
             listingData(data, page);
         }
     });
@@ -33,12 +36,13 @@ function listingData(data, page) {
         $("table > tbody").empty();
     }
     if (data.results.users.length > 0) {
+        $("<span> ("+ data.results.meta.total_data +")</span>").appendTo( ('.box-title > h3 > .total-user') );
         $.each(data.results.users, function (index, val) {
             var key = ((page - 1) * itemsPerPage) + (index + 1);
             var username = val.username ? val.username : '-';
             var createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
             var updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
-            $("<tr><th scope='row'>" + key + "</th><td class='text-capitalize'><img style='margin-right: 10px;' class='img-circle' width='30' height='30' src=" + val.avatar_url + ">" + username + "</td><td>" + val.id + "</td><td>" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
+            $("<tr><th scope='row'>" + key + "</th><td class='text-capitalize'><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + username + "</td><td>" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
         });
         $('#pagination').twbsPagination({
             totalPages: Math.ceil(data.results.meta.total_data / itemsPerPage),
@@ -76,7 +80,7 @@ $('input,textarea').on('keyup change keypress', function () {
 })
 
 $('#buttonCreateUser').on("click", function () {
-    var self = $('#buttonCreateUser')
+    var self = $('#buttonCreateUser');
     var email = $('#email').val();
     var password = $('#password').val();
     var username = $('#username').val();

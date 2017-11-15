@@ -1,0 +1,39 @@
+<svg width="152" height="152" viewBox="0 0 152 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>ic_default_avatar</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-2546 -85)">
+<g id="ic_default_avatar">
+<g id="Mask Group">
+<mask id="mask0_alpha" mask-type="alpha">
+<g id="Ellipse 2.1">
+<use xlink:href="#path0_fill" transform="translate(2550 89)" fill="#C4C4C4"/>
+</g>
+</mask>
+<g id="Group" mask="url(#mask0_alpha)">
+<g id="Ellipse">
+<use xlink:href="#path1_fill" transform="translate(2591.91 112.607)" fill="#E4E4E4"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path2_fill" transform="translate(2569.3 179.754)" fill="#E4E4E4"/>
+</g>
+</g>
+</g>
+<g id="Ellipse" opacity="0.26">
+<use xlink:href="#path0_fill" transform="translate(2550 89)" fill="#E0E0E0"/>
+<mask id="mask1_outline_out">
+<rect id="mask1_outline_inv" fill="white" x="-4" y="-4" width="152" height="152" transform="translate(2550 89)"/>
+<use xlink:href="#path0_fill" fill="black" transform="translate(2550 89)"/>
+</mask>
+<g mask="url(#mask1_outline_out)">
+<use xlink:href="#path3_stroke_2x" transform="translate(2550 89)" fill="#979797"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 144 72C 144 111.765 111.765 144 72 144C 32.2355 144 0 111.765 0 72C 0 32.2355 32.2355 0 72 0C 111.765 0 144 32.2355 144 72Z"/>
+<path id="path1_fill" d="M 60.9713 30.7759C 60.9713 47.773 47.3224 61.5518 30.4856 61.5518C 13.6489 61.5518 0 47.773 0 30.7759C 0 13.7788 13.6489 0 30.4856 0C 47.3224 0 60.9713 13.7788 60.9713 30.7759Z"/>
+<path id="path2_fill" d="M 66.9464 0C 61.4034 5.59562 44.7749 5.59562 39.2322 0C 39.2322 0 21.1984 1.41861 11.518 11.1912C 4.67284 18.1015 0 57.1803 0 57.1803L 106.179 57.1803C 106.179 57.1803 101.506 18.1015 94.6606 11.1912C 84.9802 1.41861 66.9464 0 66.9464 0Z"/>
+<path id="path3_stroke_2x" d="M 140 72C 140 109.555 109.555 140 72 140L 72 148C 113.974 148 148 113.974 148 72L 140 72ZM 72 140C 34.4446 140 4 109.555 4 72L -4 72C -4 113.974 30.0264 148 72 148L 72 140ZM 4 72C 4 34.4446 34.4446 4 72 4L 72 -4C 30.0264 -4 -4 30.0264 -4 72L 4 72ZM 72 4C 109.555 4 140 34.4446 140 72L 148 72C 148 30.0264 113.974 -4 72 -4L 72 4Z"/>
+</defs>
+</svg>

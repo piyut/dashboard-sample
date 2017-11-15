@@ -24,7 +24,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="form-group clearfix">
+                <div class="box-title clearfix">
+                    <h3 class="pull-left">Users <span class="total-user"></span></h3>
                     <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#createUserModal">
                         <span class="icon-user"></span> Add User
                     </button>
@@ -33,12 +34,11 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Display Name</th>
-                                <th>User ID</th>
-                                <th>Key</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                <th>NO.</th>
+                                <th>NAME</th>
+                                <th>USER ID</th>
+                                <th>CREATED AT</th>
+                                <th>UPDATED AT</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -65,7 +65,7 @@
                                 <div class="text-center box-input-foto">
                                     <small>Avatar</small>
                                     <div class="form-group">
-                                        <img id="avatar" src="https://scontent-sit4-1.xx.fbcdn.net/v/t39.2081-0/22088589_1654976451201719_5191478939503034368_n.png?oh=a20fd48ec154f14bfb94173d4caee1ec&oe=5AA4FC79" class="img-circle" width="144" height="144" alt="avatar user">
+                                        <img id="avatar" src="img/ic_default_avatar.svg" class="img-circle" width="144" height="144" alt="avatar user">
                                     </div>
                                     <label for="avatar_url">Upload Photo</label>
                                     <input onchange="handleFiles(this.files)" id="avatar_url" type="file">
@@ -74,8 +74,8 @@
                         </div>
                         <div class="col-sm-7">
                             <div class="form-group">
-                                <label for="email">Email / Unique ID</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email">
+                                <label for="email">User ID</label>
+                                <input type="email" class="form-control" id="email" placeholder="User ID">
                             </div>
                             <div class="form-group">
                                 <label for="username">Display Name</label>
