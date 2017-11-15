@@ -1,0 +1,12 @@
+<svg width="40" height="40" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>ic_loading</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1279 65)">
+<g id="ic_loading">
+<use xlink:href="#path0_stroke" transform="translate(1281 -63)" fill="#979797"/>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 38 18C 38 16.8954 37.1046 16 36 16C 34.8954 16 34 16.8954 34 18L 38 18ZM 18 2C 19.1046 2 20 1.10457 20 0C 20 -1.10457 19.1046 -2 18 -2L 18 2ZM 34 18C 34 26.8366 26.8366 34 18 34L 18 38C 29.0457 38 38 29.0457 38 18L 34 18ZM 18 34C 9.16344 34 2 26.8366 2 18L -2 18C -2 29.0457 6.9543 38 18 38L 18 34ZM 2 18C 2 9.16344 9.16344 2 18 2L 18 -2C 6.9543 -2 -2 6.9543 -2 18L 2 18Z"/>
+</defs>
+</svg>

@@ -1,0 +1,227 @@
+.btn-default,
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active {
+    color: #fff;
+    background-color: #2ACB6E;
+    border-color: #2ACB6E;
+}
+@media (min-width: 768px){
+    .btn-default,
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default:active {
+        padding: 13px 22px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+    .navbar-brand {
+        float: left;
+        height: auto;
+        padding: 26px 15px;
+        font-size: 18px;
+        line-height: 20px;
+    }
+}
+.disable{
+    color: #fff;
+    background-color: #ccc;
+    border-color: #ccc;
+    pointer-events: none;
+}
+.icon-user{
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    background: url('../img/ic_add_user.png') no-repeat;
+    background-size: contain;
+    margin-right: 12px;
+    height: 20px;
+    width: 20px;
+    top: 4px;
+}
+.icon-loading{
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    background: url('../img/ic_loading.svg') no-repeat;
+    background-size: contain;
+    margin-right: 30px;
+    height: 36px;
+    width: 36px;
+    top: 8px;
+}
+.icon-loading-white{
+    background: url('../img/ic_loading_white.svg') no-repeat;
+    background-size: contain;
+    margin-right: 12px;
+    height: 20px;
+    width: 20px;
+    top: 4px;
+}
+/* navbar */
+.navbar-default{
+    background: #2ACB6E;
+    border: 0;
+}
+.navbar-default .navbar-text {
+    margin-top: 56px;
+    margin-bottom: 56px;
+    color: #fff;
+}
+.navbar-default .navbar-link,
+.navbar-default .navbar-link:hover {
+    color: #fff;
+}
+/* end navbar */
+.box-table{
+    position: relative;
+    min-height: 510px;
+    overflow: hidden;
+}
+.box-loading{
+    color: #979797;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: 100%;
+    padding: 8rem;
+    text-align: center;
+    font-size: 24px;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1;
+}
+.icon-empty-user{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    margin-bottom: 30px;
+    width: 180px;
+    height: 180px;
+    background: url(../img/ic_empty_user.svg) no-repeat;
+    background-size: cover;
+}
+.info-empty{
+    font-size: 24px;
+    color: #FF7A7A;
+    margin-bottom: 5px;
+    line-height: 33px;
+}
+.instruction-empty{
+    margin-bottom: 60px;
+}
+/* pagination */
+.pagination>li.prev>a,
+.pagination>li.next>a{
+    margin: 0 40px;
+}
+.pagination>li>a{
+    color: #000;
+    border: 0;
+    border-radius: 4px;
+}
+.pagination>li>a:hover{
+    color: #ffffff;
+    background-color: #2ACB6E;
+    border-color: #2ACB6E;
+}
+.pagination>.disabled>a{
+    pointer-events: none;
+}
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover{
+    background-color: #2ACB6E;
+    border-color: #2ACB6E;
+}
+/* end pagination */
+.icon-loading {
+    -webkit-animation: icon-loading 2s infinite linear;
+    animation: icon-loading 2s infinite linear;
+}
+@keyframes icon-loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+/*start modal */
+@media (min-width: 768px){
+    .modal-dialog{
+        width: 760px;
+    }
+}
+.create-user-modal .modal-header{
+    border-bottom: 0;
+}
+.create-user-modal .modal-body{
+    margin-top: 4rem;
+    margin-bottom: 6rem;
+}
+.create-user-modal .modal-body .box-input-foto{
+    padding: 0 15px 15px 0;
+    margin-right: 30px;
+    border-right: 1px solid #d8d8d8;
+}
+.create-user-modal .modal-body .box-input-foto > small{
+    color: #999;
+}
+.create-user-modal .modal-body .box-input-foto > label {
+    cursor: pointer;
+    font-weight: normal;
+    color: #2ACB6E;
+}
+.create-user-modal .modal-body .box-input-foto > input {
+    display: none;
+}
+.create-user-modal .modal-body .box-input-foto .form-group{
+    margin-top: 15px;
+}
+.create-user-modal .form-group{
+    margin-bottom: 48px;
+}
+.create-user-modal .form-group label {
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 0;
+    color: #999;
+}
+.create-user-modal .form-group input,
+.create-user-modal .form-group input:focus{
+    border: 0;
+    border-bottom: 2px solid #e0e0e0;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 16px;
+    padding: 0;
+}
+.create-user-modal .modal-footer{
+    background: #FEDB70;
+}
+/* end modal */
+/* footer */
+footer{
+    padding: 38px 32px;
+    background: #FEDB70;
+}
+footer ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+footer ul li{
+    display: inline-block;
+    margin-right: 48px;
+}
+footer ul li a{
+    font-size: 16px;
+    color: #000;
+}

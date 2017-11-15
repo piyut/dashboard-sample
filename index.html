@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Dashboard Sample</title>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img alt="Qiscus" src="img/qiscus-logo.png">
+                </a>
+            </div>
+            <p class="navbar-text pull-right"><a href="#" class="navbar-link">Sign Out</a></p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group clearfix">
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#createUserModal">
+                        <span class="icon-user"></span> Add User
+                    </button>
+                </div>
+                <div class="box-table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Display Name</th>
+                                <th>User ID</th>
+                                <th>Key</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <ul id="pagination" class="pagination"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade create-user-modal" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Create User</h3>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="col-sm-5">
+                            <div class="row">
+                                <div class="text-center box-input-foto">
+                                    <small>Avatar</small>
+                                    <div class="form-group">
+                                        <img id="avatar" src="https://scontent-sit4-1.xx.fbcdn.net/v/t39.2081-0/22088589_1654976451201719_5191478939503034368_n.png?oh=a20fd48ec154f14bfb94173d4caee1ec&oe=5AA4FC79" class="img-circle" width="144" height="144" alt="avatar user">
+                                    </div>
+                                    <label for="avatar_url">Upload Photo</label>
+                                    <input onchange="handleFiles(this.files)" id="avatar_url" type="file">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="form-group">
+                                <label for="email">Email / Unique ID</label>
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Display Name</label>
+                                <input type="text" class="form-control" id="username" placeholder="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer panel-footer">
+                        <button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Add User</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <ul>
+                <li><a href="//www.qiscus.com">Qiscus Website</a></li>
+                <li><a href="//www.qiscus.com/documentation">Docs</a></li>
+                <li><a href="//www.qiscus.com/dashboard/login">Dashboard</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.twbsPagination.min.js"></script>
+    <script src="js/dateFormat.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
