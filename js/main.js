@@ -5,7 +5,7 @@ var page = 0;
 getDataFromApi(page);
 
 function getDataFromApi(page) {
-    var url = 'https://wory.qiscus.com/api/v2.1/rest/get_user_list';
+    var url = 'https://sampleapp-65ghcsaysse.qiscus.com/api/v2.1/rest/get_user_list';
     $("<div class='box-loading'><span class='icon-loading'></span> LOADING</div>").appendTo( ('.box-table') );
 
     $.ajax({
@@ -16,7 +16,7 @@ function getDataFromApi(page) {
             page: page
         },
         headers: {
-            QISCUS_SDK_SECRET: 'bc01ec2b15588369317421bfb25a44bf',
+            QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
             'Content-Type':'application/x-www-form-urlencoded'
         },
         dataType: 'json',
@@ -76,10 +76,6 @@ $('input,textarea').on('keyup change keypress', function () {
 })
 
 $('#buttonCreateUser').on("click", function () {
-    /*
-        ** this url is your app code get from https://www.qiscus.com/dashboard
-        ** more info about create user https://www.qiscus.com/documentation/rest/list-api
-    */
     var self = $('#buttonCreateUser')
     var email = $('#email').val();
     var password = $('#password').val();
@@ -89,7 +85,7 @@ $('#buttonCreateUser').on("click", function () {
     self.css('background', '#F2994A');
     self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
     self.addClass('disabled');
-    var url = 'https://wory.qiscus.com/api/v2/rest/login_or_register'
+    var url = 'https://sampleapp-65ghcsaysse.qiscus.com/api/v2/rest/login_or_register'
     $.ajax({
         url: url,
         method: 'POST',
@@ -101,7 +97,7 @@ $('#buttonCreateUser').on("click", function () {
             avatar_url: avatar_url
         },
         headers: {
-            QISCUS_SDK_SECRET: 'bc01ec2b15588369317421bfb25a44bf',
+            QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
             'Content-Type': 'application/x-www-form-urlencoded'
         },
         dataType: 'json',
