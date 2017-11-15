@@ -42,7 +42,7 @@ function listingData(data, page) {
             var username = val.username ? val.username : '-';
             var createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
             var updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
-            $("<tr><th scope='row'>" + key + "</th><td class='text-capitalize'><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + username + "</td><td>" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
+            $("<tr><th scope='row'>" + key + "</th><td class='text-capitalize'><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
         });
         $('#pagination').twbsPagination({
             totalPages: Math.ceil(data.results.meta.total_data / itemsPerPage),
@@ -52,7 +52,7 @@ function listingData(data, page) {
             }
         });
     } else {
-        $("<tr></tr><tr><td colspan='6' class='text-center'><div class='icon-empty-user'></div><div class='info-empty'>User Data Not Found</div><div class='instruction-empty'>You can add user to use it on your app that using Qiscus SDK</div><div><button type='button' class='btn btn-default' data-toggle='modal' data-target='#createUserModal'><span class='icon-user'></span> Add User </button></div></td></tr>").appendTo( ('tbody') );
+        $("<tr></tr><tr><td colspan='5' class='text-center'><div class='icon-empty-user'></div><div class='info-empty'>User Data Not Found</div><div class='instruction-empty'>You can add user to use it on your app that using Qiscus SDK</div><div><button type='button' class='btn btn-default' data-toggle='modal' data-target='#createUserModal'><span class='icon-user'></span> Add User </button></div></td></tr>").appendTo( ('tbody') );
     }
 }
 
