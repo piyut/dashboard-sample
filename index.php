@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/vendor/autoload.php';
+require('vendor/autoload.php');
 
 use GuzzleHttp\Client;
 use Phroute\Phroute\RouteCollector;
