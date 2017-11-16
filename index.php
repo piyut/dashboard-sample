@@ -28,6 +28,9 @@ $router->get('/rest/contact_list', function () use($client, $app_id, $secret_key
     return $httpResp->getBody();
 });
 
+$router->get('/test', function(){
+    return 'this is test';
+});
 
 $dispatcher =  new Dispatcher($router->getData());
 $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
