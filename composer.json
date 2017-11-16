@@ -1,0 +1,8 @@
+{
+    "name": "qiscus/dashboard-sample",
+    "description": "A server and frontend sample for qiscus sdk",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phroute/phroute": "^2.1"
+    }
+}
