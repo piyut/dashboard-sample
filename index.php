@@ -6,8 +6,8 @@ use GuzzleHttp\Client;
 use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\Dispatcher;
 
-$app_id = 'check';
-$secret_key = 'rahasiabanget';
+$app_id = 'sampleapp-65ghcsaysse';
+$secret_key = 'dc0c7e608d9a23c3c8012c6c8572e788';
 $base_url = 'https://' . $app_id . '.qiscus.com/';
 
 $client = new Client(['base_uri' => $base_url]);
