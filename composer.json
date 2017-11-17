@@ -3,6 +3,9 @@
     "description": "A server and frontend sample for qiscus sdk",
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "nikic/fast-route": "^1.2",
+        "klein/klein": "^2.1",
+        "vlucas/phpdotenv": "^2.4"
     }
 }
