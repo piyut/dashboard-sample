@@ -18,7 +18,7 @@ $route->respond('GET', '/rest/contacts', function($request){
     if(empty($request->limit) || $request->limit == 0) {
         $request->limit = 20;
     }
-    $contacts = getContactList();
+    $contacts = getContactList($request->page, $request->limit);
     return $contacts;
 });
 $route->respond('POST', '/rest/upload', function($request){
@@ -35,10 +35,10 @@ function getContactList($page, $limit) {
     $call = callHttp("/api/v2.1/rest/get_user_list", [
         [
             'name'=> 'page',
-            'contents' => $limit,
+            'contents' => $page,
         ], [
             'name' => 'limit',
-            'limit' => $limit,
+            'contents' => $limit,
         ]
     ]);
     header('Content-Type: application/json');
