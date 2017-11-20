@@ -1,11 +1,12 @@
 var page = 0;
     itemsPerPage = 10;
     avatar = $('#avatar');
+    baseUrl = 'https://sampleapp-65ghcsaysse.qiscus.com';
 
 getDataFromApi(page);
 
 function getDataFromApi(page) {
-    var url = 'https://sampleapp-65ghcsaysse.qiscus.com/api/v2.1/rest/get_user_list';
+    var url = baseUrl + '/api/v2.1/rest/get_user_list';
     $("<div class='box-loading'><span class='icon-loading'></span> LOADING</div>").appendTo( ('.box-table') );
 
     $.ajax({
@@ -42,7 +43,7 @@ function listingData(data, page) {
             var username = val.username ? val.username : '-';
             var createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
             var updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
-            $("<tr><th scope='row'>" + key + "</th><td class='text-capitalize'><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
+            $("<tr><th scope='row'>" + key + "</th><td><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
         });
         $('#pagination').twbsPagination({
             totalPages: Math.ceil(data.results.meta.total_data / itemsPerPage),
@@ -67,7 +68,7 @@ function handleFiles(files) {
         info.innerHTML = "Size: " + files[i].size + " bytes";
         avatar.parent().append(info);
     }
-    avatar = files[0];
+    // avatar = files[0];
 }
 
 $('input,textarea').on('keyup change keypress', function () {
@@ -84,37 +85,61 @@ $('#buttonCreateUser').on("click", function () {
     var email = $('#email').val();
     var password = $('#password').val();
     var username = $('#username').val();
-    var avatar_url = $('#avatar_url').val();
+    var file = $('#avatar_url').val();
+    var avatar_url = null;
     self.empty();
     self.css('background', '#F2994A');
     self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
     self.addClass('disabled');
-    var url = 'https://sampleapp-65ghcsaysse.qiscus.com/api/v2/rest/login_or_register'
-    $.ajax({
-        url: url,
-        method: 'POST',
-        type: 'POST',
-        data: {
-            email: email,
-            password: password,
-            username: username,
-            avatar_url: avatar_url
-        },
-        headers: {
-            QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        dataType: 'json',
-        success: function (data) {
-            $('#createUserModal').modal('hide')
-            setTimeout(function () {
-                location.reload()
-            }, 1000);
-        },
-        error: function (error) {
-            self.empty();
-            self.append('Add User')
-            self.css('background', '#2ACB6E');
-        }
-    });
+    var url = baseUrl + '/api/v2/sdk/upload'
+    $.when(
+        $.ajax({
+            url: url,
+            method: 'POST',
+            type: 'POST',
+            data: {
+                file: file
+            },
+            headers: {
+                QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            dataType: 'json',
+            success: function (data) {
+                avatar_url = data.results.file.url;
+            },
+            error: function (error) {
+
+            }
+        })
+    ).done(
+        $.ajax({
+            url: url,
+            method: 'POST',
+            type: 'POST',
+            data: {
+                email: email,
+                password: password,
+                username: username,
+                avatar_url: avatar_url
+            },
+            headers: {
+                QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#createUserModal').modal('hide')
+                setTimeout(function () {
+                    location.reload()
+                }, 1000);
+            },
+            error: function (error) {
+                self.empty();
+                self.append('Add User')
+                self.css('background', '#2ACB6E');
+            }
+        })
+    );
+
 });
