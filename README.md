@@ -1,5 +1,5 @@
 # dashboard-sample
-To start with sample dashboard, you should do the following steps: clone sample dashboard [here] (https://github.com/qiscus/dashboard-sample), or just copy the following code.
+To start with sample dashboard, you should do the following steps: clone sample dashboard [here](https://github.com/qiscus/dashboard-sample), or just copy the following code.
 
 git clone https://github.com/qiscus/dashboard-sample.git
 cd dashboard-sample
