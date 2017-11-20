@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-use GuzzleHttp\Client;;
+use GuzzleHttp\Client;
 
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
@@ -14,12 +14,22 @@ $route->respond('GET', '/rest/contacts', function(){
     $contacts = getContactList();
     return $contacts;
 });
+$route->respond('POST', '/rest/upload', function(){
+    $file = uploadPhoto();
+    return $file;
+});
 $route->dispatch();
 
 function getContactList() {
     $call = callHttp("/api/v2.1/rest/get_user_list");
     header('Content-Type: application/json');
     echo $call;
+}
+
+function uploadPhoto() {
+    $photo = callHttp("/api/v2/sdk/upload");
+    header('Content-Type: application/json');
+    echo $photo;
 }
 
 function callHttp($url, $params = []){

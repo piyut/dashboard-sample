@@ -2,6 +2,7 @@ var page = 0;
     itemsPerPage = 10;
     avatar = $('#avatar');
     baseUrl = 'https://sampleapp-65ghcsaysse.qiscus.com';
+    secretKey = 'dc0c7e608d9a23c3c8012c6c8572e788';
 
 getDataFromApi(page);
 
@@ -17,7 +18,7 @@ function getDataFromApi(page) {
             page: page
         },
         headers: {
-            QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
+            QISCUS_SDK_SECRET: secretKey,
             'Content-Type':'application/x-www-form-urlencoded'
         },
         dataType: 'json',
@@ -63,12 +64,13 @@ function listingData(data, page) {
 window.URL = window.URL || window.webkitURL;
 function handleFiles(files) {
     for (var i = 0; i < files.length; i++) {
+        const date = new Date(files[i].lastModified);
         avatar.attr('src', window.URL.createObjectURL(files[i]));
         var info = document.createElement("div");
         info.innerHTML = "Size: " + files[i].size + " bytes";
         avatar.parent().append(info);
+        avatar = files[i];
     }
-    // avatar = files[0];
 }
 
 $('input,textarea').on('keyup change keypress', function () {
@@ -85,26 +87,28 @@ $('#buttonCreateUser').on("click", function () {
     var email = $('#email').val();
     var password = $('#password').val();
     var username = $('#username').val();
-    var file = $('#avatar_url').val();
     var avatar_url = null;
+    var file_data = $('#avatar_url').prop('files')[0];
+    var form_data = new FormData();
+    form_data.append('file', file_data);
+
     self.empty();
     self.css('background', '#F2994A');
     self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
     self.addClass('disabled');
-    var url = baseUrl + '/api/v2/sdk/upload'
     $.when(
         $.ajax({
-            url: url,
-            method: 'POST',
+            url: baseUrl + '/api/v2/sdk/upload',
             type: 'POST',
-            data: {
-                file: file
-            },
+            dataType: 'text',
+            contentType: false,
+            processData: false,
+            data: form_data,
             headers: {
-                QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
+                Authorization: 'Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4MCwidGltZXN0YW1wIjoiMjAxNy0xMS0yMCAwMzo0OToyNyArMDAwMCJ9.oU1rl9ZX5ZfObuutTl4VTaXa6OmK_OioJOev2AhyvlY',
+                QISCUS_SDK_SECRET: secretKey,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            dataType: 'json',
             success: function (data) {
                 avatar_url = data.results.file.url;
             },
@@ -112,9 +116,9 @@ $('#buttonCreateUser').on("click", function () {
 
             }
         })
-    ).done(
+    ).then(
         $.ajax({
-            url: url,
+            url: baseUrl + '/api/v2/rest/login_or_register',
             method: 'POST',
             type: 'POST',
             data: {
@@ -124,7 +128,7 @@ $('#buttonCreateUser').on("click", function () {
                 avatar_url: avatar_url
             },
             headers: {
-                QISCUS_SDK_SECRET: 'dc0c7e608d9a23c3c8012c6c8572e788',
+                QISCUS_SDK_SECRET: secretKey,
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             dataType: 'json',
