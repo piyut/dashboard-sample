@@ -88,7 +88,7 @@ $('#buttonCreateUser').on("click", function () {
     var password = $('#password').val();
     var username = $('#username').val();
     var avatar_url = null;
-    var file_data = $('#avatar_url').prop('files')[0];
+    var file_data = $('#avatar_url').prop('files');
     var form_data = new FormData();
     form_data.append('file', file_data);
 
@@ -98,9 +98,9 @@ $('#buttonCreateUser').on("click", function () {
     self.addClass('disabled');
     $.when(
         $.ajax({
-            url: baseUrl + '/api/v2/sdk/upload',
+            url: 'http://localhost:8000/api/upload',
             type: 'POST',
-            dataType: 'text',
+            dataType: 'json',
             contentType: false,
             processData: false,
             data: form_data,
@@ -110,10 +110,11 @@ $('#buttonCreateUser').on("click", function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: function (data) {
+                debugger
                 avatar_url = data.results.file.url;
             },
             error: function (error) {
-
+                debugger
             }
         })
     ).then(
