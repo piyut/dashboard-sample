@@ -88,9 +88,11 @@ $('#buttonCreateUser').on("click", function () {
     var password = $('#password').val();
     var username = $('#username').val();
     var avatar_url = null;
-    var file_data = $('#avatar_url').prop('files');
+    var file_data = $('#avatar_url').prop('files')[0];
     var form_data = new FormData();
     form_data.append('file', file_data);
+    form_data.append('token ', "ZBuqIoiAVNb87vrZyrgg");
+
 
     self.empty();
     self.css('background', '#F2994A');
@@ -110,11 +112,9 @@ $('#buttonCreateUser').on("click", function () {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: function (data) {
-                debugger
                 avatar_url = data.results.file.url;
             },
             error: function (error) {
-                debugger
             }
         })
     ).then(
