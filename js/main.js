@@ -44,7 +44,7 @@ function listingData(data, page) {
             var username = val.username ? val.username : '-';
             var createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
             var updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
-            $("<tr><th scope='row'>" + key + "</th><td><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
+            $("<tr><th class='text-center' scope='row'>" + key + "</th><td><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td></tr>").appendTo( ('tbody') );
         });
         $('#pagination').twbsPagination({
             totalPages: Math.ceil(data.results.meta.total_data / itemsPerPage),
