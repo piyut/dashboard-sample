@@ -183,8 +183,7 @@ body{
     border-bottom: 0;
 }
 .create-user-modal .modal-body{
-    margin-top: 4rem;
-    margin-bottom: 6rem;
+    margin-bottom: 15px;
 }
 .create-user-modal .modal-body .box-input-foto{
     padding: 0 15px 15px 0;
@@ -206,7 +205,7 @@ body{
     margin-top: 15px;
 }
 .create-user-modal .form-group{
-    margin-bottom: 48px;
+    margin-bottom: 30px;
 }
 .create-user-modal .form-group label {
     font-size: 12px;
@@ -225,6 +224,7 @@ body{
 }
 .create-user-modal .modal-footer{
     background: #FEDB70;
+    padding: 10px 15px;
 }
 /* end modal */
 /* footer */
