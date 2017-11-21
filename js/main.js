@@ -98,7 +98,7 @@ $('#buttonCreateUser').on("click", function () {
     self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
     self.addClass('disabled');
     $.ajax({
-        url: 'http://dashboard-sample.herokuapp.com/api/upload',
+        url: '//dashboard-sample.herokuapp.com/api/upload',
         type: 'POST',
         dataType: 'json',
         contentType: false,
@@ -121,7 +121,7 @@ $('#buttonCreateUser').on("click", function () {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 dataType: 'json',
-                success: function (data) {
+                success: function (response) {
                     $('#createUserModal').modal('hide')
                     setTimeout(function () {
                         location.reload()
