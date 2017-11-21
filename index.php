@@ -12,7 +12,7 @@ $route->respond('GET', '/', function(){
    return require_once 'home.html';
 });
 
-$route->respond('GET', '/rest/contacts', function($request){
+$route->respond('GET', '/api/contacts', function($request){
     if(empty($request->page) || $request->page == 0 ) {
         $request->page = 1;
     }
