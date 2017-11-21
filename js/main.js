@@ -83,60 +83,68 @@ $('input,textarea').on('keyup change keypress', function () {
 
 $('#buttonCreateUser').on("click", function () {
     var self = $('#buttonCreateUser');
-    var email = $('#email').val();
-    var password = $('#password').val();
-    var username = $('#username').val();
-    var avatar_url = "";
-    var file_data = $('#avatar_url').prop('files')[0];
-    var form_data = new FormData();
-    form_data.append('file', file_data);
-    form_data.append('token', "ZBuqIoiAVNb87vrZyrgg");
-
+    var userData = {
+        email: $('#email').val() ? $('#email').val() : null,
+        password: $('#password').val() ? $('#password').val() : null,
+        username: $('#username').val() ? $('#username').val() : null,
+        avatar_url: null
+    }
+    var file_data = $('#avatar_url').prop('files')[0] ? $('#avatar_url').prop('files')[0] : "";
 
     self.empty();
     self.css('background', '#F2994A');
     self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
     self.addClass('disabled');
+    if (file_data !== "") {
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        form_data.append('token', "ZBuqIoiAVNb87vrZyrgg")
+        $.ajax({
+            url: '//dashboard-sample.herokuapp.com/api/upload',
+            type: 'POST',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            data: form_data,
+            success: function (response) {
+                userData.avatar_url = response.results.file.url;
+                loginOrRegister(userData);
+            },
+            error: function (error) {
+
+            }
+        })
+    } else {
+        loginOrRegister(userData);
+    }
+});
+
+function loginOrRegister(userData) {
     $.ajax({
-        url: '//dashboard-sample.herokuapp.com/api/upload',
+        url: baseUrl + '/api/v2/rest/login_or_register',
+        method: 'POST',
         type: 'POST',
+        data: {
+            email: userData.email,
+            password: userData.password,
+            username: userData.username,
+            avatar_url: userData.avatar_url
+        },
+        headers: {
+            QISCUS_SDK_SECRET: secretKey,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
         dataType: 'json',
-        contentType: false,
-        processData: false,
-        data: form_data,
         success: function (response) {
-            avatar_url = response.results.file.url;
-            $.ajax({
-                url: baseUrl + '/api/v2/rest/login_or_register',
-                method: 'POST',
-                type: 'POST',
-                data: {
-                    email: email,
-                    password: password,
-                    username: username,
-                    avatar_url: avatar_url
-                },
-                headers: {
-                    QISCUS_SDK_SECRET: secretKey,
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                dataType: 'json',
-                success: function (response) {
-                    $('#createUserModal').modal('hide')
-                    setTimeout(function () {
-                        location.reload()
-                    }, 1000);
-                },
-                error: function (error) {
-                    self.empty();
-                    self.append('Add User')
-                    self.css('background', '#2ACB6E');
-                }
-            })
+            $('#createUserModal').modal('hide')
+            setTimeout(function () {
+                location.reload()
+            }, 1000);
         },
         error: function (error) {
-
+            self.empty();
+            self.append('Add User')
+            self.css('background', '#2ACB6E');
         }
     })
-
-});
+}

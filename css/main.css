@@ -139,6 +139,7 @@ body{
     color: #000;
     border: 0;
     border-radius: 4px;
+    margin: 0 5px;
 }
 .pagination>li>a:hover{
     color: #ffffff;
