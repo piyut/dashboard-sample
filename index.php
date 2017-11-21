@@ -54,7 +54,7 @@ function getContactList($page, $limit) {
         ]
     ]);
     header('Content-Type: application/json');
-    echo $call;
+    return $call;
 }
 
 function uploadPhoto($file, $token, $filename) {
