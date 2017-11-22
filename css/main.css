@@ -9,11 +9,23 @@ body{
     background-color: #2ACB6E;
     border-color: #2ACB6E;
 }
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    color: #fff;
+    background-color: #F2994A;
+    border-color: #F2994A;
+}
 @media (min-width: 768px){
     .btn-default,
     .btn-default:hover,
     .btn-default:focus,
-    .btn-default:active {
+    .btn-default:active,
+    .btn-secondary,
+    .btn-secondary:hover,
+    .btn-secondary:focus,
+    .btn-secondary:active {
         padding: 10px 22px;
         font-size: 16px;
         border-radius: 8px;
@@ -25,6 +37,9 @@ body{
         font-size: 18px;
         line-height: 20px;
     }
+}
+.button-action{
+    margin: 10px;
 }
 .disable{
     color: #fff;

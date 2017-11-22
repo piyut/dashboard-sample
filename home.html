@@ -27,7 +27,7 @@
             <div class="col-xs-12">
                 <div class="box-title clearfix">
                     <h3 class="pull-left">Users <span class="total-user"></span></h3>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#createUserModal">
+                    <button id="buttonCreate" type="button" class="btn btn-default pull-right">
                         <span class="icon-user"></span> Add User
                     </button>
                 </div>
@@ -39,6 +39,7 @@
                                 <th>USER ID</th>
                                 <th>CREATED AT</th>
                                 <th>UPDATED AT</th>
+                                <th class="text-center">ACTION</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -52,7 +53,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade create-user-modal" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade create-user-modal" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                     <div class="modal-header">
@@ -66,25 +67,15 @@
                                     <small>Avatar</small>
                                     <div class="form-group">
                                         <img id="avatar" src="img/ic_default_avatar.svg" class="img-circle" width="144" height="144" alt="avatar user">
+                                        <div id="sizeImg"></div>
                                     </div>
-                                    <label for="avatar_url">Upload Photo</label>
-                                    <input onchange="handleFiles(this.files)" id="avatar_url" type="file" multiple>
+                                    <label for="avatar_url"></label>
+                                    <input id="avatar_url" type="file" multiple>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <label for="email">User ID</label>
-                                <input type="email" class="form-control" id="email" placeholder="User ID">
-                            </div>
-                            <div class="form-group">
-                                <label for="username">Display Name</label>
-                                <input type="text" class="form-control" id="username" placeholder="username">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" placeholder="Password">
-                            </div>
+                        <div class="col-sm-7 box-input">
+
                         </div>
                     </div>
                     <div class="modal-footer panel-footer">
