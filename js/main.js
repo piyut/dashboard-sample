@@ -39,7 +39,7 @@ $(document).ready(function () {
         }
     };
 
-    $('input,textarea').on('keyup change keypress', function () {
+    $('body').on('keyup change keypress', 'input,textarea', function () {
         var submit = $('#submitLogin')
         if ($('input#appCode').val() != '' && $('input#secreetKey').val() != '') {
             submit.removeClass('disable')
@@ -48,13 +48,11 @@ $(document).ready(function () {
         }
     })
     $('body').on('click', '#submitLogin', function () {
-        var value = {
-            app_code: $('#appCode').val(),
-            secreet_key: $('#secreetKey').val()
-        }
-        dashboardSampleCookies.setItem('APP_ID', $('#appCode').val(), 31556926)
-        dashboardSampleCookies.setItem('SECRET_KEY', $('#secreetKey').val(), 31556926)
-        window.location.reload()
+        dashboardSampleCookies.setItem('APP_ID', $('#appCode').val(), 31556926);
+        dashboardSampleCookies.setItem('SECRET_KEY', $('#secreetKey').val(), 31556926);
+        setTimeout(function () {
+            location.reload()
+        }, 1000);
     })
     var page = 1
         itemsPerPage = 10
@@ -127,7 +125,7 @@ $(document).ready(function () {
     var checkForm = function() {
         return $('input,textarea').on('keyup change keypress', function () {
             var send        = $('#buttonCreateUser')
-            if ($('input#email').val() != '' && $('input#username').val() != '' && $('input#password').val() != '') {
+            if ($('input#email').val() != '' && $('input#password').val() != '') {
                 send.removeClass('disable')
             } else {
                 send.addClass('disable')
@@ -139,7 +137,7 @@ $(document).ready(function () {
      * create new user
      */
     $('body').on('click', '#buttonCreate', function (e) {
-        var inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" placeholder="User ID"></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
+        var inputElem = $('<div class="form-group"><label for="email">User ID / Display Name</label><input type="email" class="form-control" id="email" placeholder="User ID / Display Name"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
             btnCreate = $('<button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Add User</button>')
         $('#myModalLabel').empty();
         $('#myModalLabel').append('Create User');
