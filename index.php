@@ -12,14 +12,18 @@ header("Access-Control-Allow-Origin: *");
 
 $route->respond('GET', '/', function(){
     if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
-        echo "asd";
+        require_once 'home.html';
     } else {
         redirectHttp("/login");
     }
 });
 
 $route->respond('GET', '/login', function(){
-    require_once 'login.html';
+    if(!isset($_COOKIE['APP_ID']) && !isset($_COOKIE['SECRET_KEY'])){
+        require_once 'login.html';
+    } else {
+        redirectHttp("/");
+    }
 });
 
 $route->respond('GET', '/api/contacts', function($request){
