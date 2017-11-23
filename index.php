@@ -1,12 +1,6 @@
 <?php
-//Checks if there is a login cookie
-if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
-    return require_once 'home.html';
-} else {
-    return require_once 'login.html';
-}
-
 require 'vendor/autoload.php';
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -16,12 +10,16 @@ $dotenv->load();
 $route = new \Klein\Klein();
 header("Access-Control-Allow-Origin: *");
 
-$route->respond('GET', '/home', function(){
-    return require_once 'home.html';
+$route->respond('GET', '/', function(){
+    if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
+        echo "asd";
+    } else {
+        redirectHttp("/login");
+    }
 });
 
-$route->respond('GET', '/', function(){
-    return require_once 'login.html';
+$route->respond('GET', '/login', function(){
+    require_once 'login.html';
 });
 
 $route->respond('GET', '/api/contacts', function($request){
@@ -99,4 +97,14 @@ function callHttp($url, $method = 'GET', $params = []){
         return $e;
     }
     return $httpResp->getBody();
+}
+
+
+function redirectHttp($prefixUri) {
+    if (isset($_SERVER["SERVER_PORT"])){
+        header('Location:http://'.$_SERVER['SERVER_NAME'].$prefixUri);
+    } else {
+        header('Location:http://'.$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'].$prefixUri);
+    }
+    exit;
 }
