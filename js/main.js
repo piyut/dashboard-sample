@@ -210,7 +210,7 @@ $( document ).ready(function(){
             inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" value='+ email +' placeholder="User ID"></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" value='+ name +' placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
             btnUpdate = $('<button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Update User</button>')
         $('#myModalLabel').empty();
-        $('#myModalLabel').append('Create User');
+        $('#myModalLabel').append('Update User');
         $('#avatar').attr('src', $(this).closest('tr').find('img.img-circle').attr('src'));
         $('#avatar_url').closest('.box-input-foto').find('label').empty();
         $('#avatar_url').closest('.box-input-foto').find('label').append('Upload Photo');
