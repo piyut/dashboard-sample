@@ -1,10 +1,69 @@
-$( document ).ready(function(){
-    var page = 1;
-        itemsPerPage = 10;
-        avatar = $('#avatar');
-        baseUrl = 'https://sampleapp-65ghcsaysse.qiscus.com';
-        secretKey = 'dc0c7e608d9a23c3c8012c6c8572e788';
-        users = [];
+$(document).ready(function () {
+    var dashboardSampleCookies = {
+        getItem: function (sKey) {
+          if (!sKey) { return null; }
+          return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        },
+        setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+          if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+          var sExpires = "";
+          if (vEnd) {
+            switch (vEnd.constructor) {
+              case Number:
+                sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                break;
+              case String:
+                sExpires = "; expires=" + vEnd;
+                break;
+              case Date:
+                sExpires = "; expires=" + vEnd.toUTCString();
+                break;
+            }
+          }
+          document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+          return true;
+        },
+        removeItem: function (sKey, sPath, sDomain) {
+          if (!this.hasItem(sKey)) { return false; }
+          document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+          return true;
+        },
+        hasItem: function (sKey) {
+          if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+          return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+        },
+        keys: function () {
+          var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+          for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+          return aKeys;
+        }
+    };
+
+    $('input,textarea').on('keyup change keypress', function () {
+        var submit = $('#submitLogin')
+        if ($('input#appCode').val() != '' && $('input#secreetKey').val() != '') {
+            submit.removeClass('disable')
+        } else {
+            submit.addClass('disable')
+        }
+    })
+    $('body').on('click', '#submitLogin', function () {
+        var value = {
+            app_code: $('#appCode').val(),
+            secreet_key: $('#secreetKey').val()
+        }
+        dashboardSampleCookies.setItem('APP_ID', $('#appCode').val(), 31556926)
+        dashboardSampleCookies.setItem('SECRET_KEY', $('#secreetKey').val(), 31556926)
+        window.location.reload()
+    })
+    var page = 1
+        itemsPerPage = 10
+        avatar = $('#avatar')
+        app_code = dashboardSampleCookies.getItem('APP_ID')
+        secreet_key = dashboardSampleCookies.getItem('SECRET_KEY')
+        baseUrl = 'https://'+ app_code +'.qiscus.com'
+        secretKey = secreet_key
+        users = []
 
     getUsers = {
         getDataFromApi: function (page) {
@@ -46,9 +105,9 @@ $( document ).ready(function(){
             $("<span> ("+ data.results.meta.total_data +")</span>").appendTo( ('.box-title > h3 > .total-user') );
             $.each(data.results.users, function (index, val) {
                 var key = ((page - 1) * itemsPerPage) + (index + 1);
-                var username = val.username ? val.username : '-';
-                var createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
-                var updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
+                    username = val.username ? val.username : '-'
+                    createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
+                    updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
                 $("<tr data-name="+ username +" data-email="+ val.email +" data-create-date="+ val.created_at +" data-update-date="+ val.updated_at +" data-value="+ val.id +"><th class='text-center' scope='row'>" + key + "</th><td><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td><td class='text-center'><a href='#' class='button-action button-update-user'><img src='img/ic_pencil.svg' width='18' height='18' alt='view'></a><a href='#' class='button-action button-view-user'><img src='img/ic_eye.svg' width='18' height='18' alt='view'></a></td></tr>").appendTo( ('tbody') );
             });
             $('#pagination').twbsPagination({
@@ -94,7 +153,6 @@ $( document ).ready(function(){
         $.when( $('#createUserModal').modal('show') ).done(function() {
             checkForm();
         });
-        ;
     });
 
     window.URL = window.URL || window.webkitURL;
@@ -182,6 +240,7 @@ $( document ).ready(function(){
      * view user
      */
     $('body').on('click', '.button-view-user', function (e) {
+        console.log($(this).closest('tr').data("options"));
         var name = $(this).closest('tr').data("name")
             email = $(this).closest('tr').data("email")
             createDate = DateFormat.format.date($(this).closest('tr').data("createDate"), 'dd/MM/yyyy')
@@ -221,6 +280,11 @@ $( document ).ready(function(){
         $.when( $('#createUserModal').modal('show') ).done(function() {
             checkForm();
         });
-        ;
     });
+
+    $('body').on('click', '#buttonLogout', function () {
+        dashboardSampleCookies.removeItem('APP_ID');
+        dashboardSampleCookies.removeItem('SECRET_KEY');
+        location.reload();
+    })
 })

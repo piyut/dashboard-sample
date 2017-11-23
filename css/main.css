@@ -220,27 +220,27 @@ body{
 .create-user-modal .modal-body .box-input-foto .form-group{
     margin-top: 15px;
 }
-.create-user-modal .form-group{
+.create-user-modal .modal-footer{
+    background: #FEDB70;
+    padding: 10px 15px;
+}
+.form-group{
     margin-bottom: 30px;
 }
-.create-user-modal .form-group label {
+.form-group label {
     font-size: 12px;
     font-weight: normal;
     margin-bottom: 0;
     color: #999;
 }
-.create-user-modal .form-group input,
-.create-user-modal .form-group input:focus{
+.form-group input,
+.form-group input:focus{
     border: 0;
     border-bottom: 2px solid #e0e0e0;
     border-radius: 0;
     box-shadow: none;
     font-size: 16px;
     padding: 0;
-}
-.create-user-modal .modal-footer{
-    background: #FEDB70;
-    padding: 10px 15px;
 }
 /* end modal */
 /* footer */
@@ -260,4 +260,12 @@ footer ul li{
 }
 footer ul li a{
     color: #000;
+}
+
+.content-login{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 390px;
 }

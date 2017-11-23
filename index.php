@@ -1,4 +1,11 @@
 <?php
+//Checks if there is a login cookie
+if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
+    return require_once 'home.html';
+} else {
+    return require_once 'login.html';
+}
+
 require 'vendor/autoload.php';
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -8,8 +15,13 @@ $dotenv->load();
 
 $route = new \Klein\Klein();
 header("Access-Control-Allow-Origin: *");
+
+$route->respond('GET', '/home', function(){
+    return require_once 'home.html';
+});
+
 $route->respond('GET', '/', function(){
-   return require_once 'home.html';
+    return require_once 'login.html';
 });
 
 $route->respond('GET', '/api/contacts', function($request){
@@ -72,21 +84,19 @@ function uploadPhoto($file, $token, $filename) {
 }
 
 function callHttp($url, $method = 'GET', $params = []){
-    $base_url = 'https://' . getenv('APP_ID') . '.qiscus.com/';
+    $base_url = 'https://' . $_COOKIE['APP_ID'] . '.qiscus.com/';
     try{
         $client = new Client(['base_uri' => $base_url]);
         $httpResp = $client->request($method, $url, [
             'multipart' => $params,
             'headers' => [
                 'Accept' => 'application/json',
-                'QISCUS_SDK_APP_ID' => getenv('APP_ID'),
-                'QISCUS_SDK_SECRET' => getenv('SECRET_KEY')
+                'QISCUS_SDK_APP_ID' => $_COOKIE['APP_ID'],
+                'QISCUS_SDK_SECRET' => $_COOKIE['SECRET_KEY']
             ]
         ]);
     } catch (GuzzleException $e){
         return $e;
     }
-
-
     return $httpResp->getBody();
 }
