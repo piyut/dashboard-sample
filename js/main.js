@@ -61,7 +61,7 @@ $(document).ready(function () {
         secreet_key = dashboardSampleCookies.getItem('SECRET_KEY')
         baseUrl = 'https://'+ app_code +'.qiscus.com'
         secretKey = secreet_key
-        users = []
+        warning = $('<img src="img/ic_warning.svg">')
 
     getUsers = {
         getDataFromApi: function (page) {
@@ -81,7 +81,6 @@ $(document).ready(function () {
                 },
                 dataType: 'json',
                 success: function (response) {
-                    users = response.results.users;
                     $('table > tbody').empty();
                     $('.box-loading').remove();
                     if ($(".box-title > h3 > .total-user").children().length > 0) {
@@ -137,7 +136,7 @@ $(document).ready(function () {
      * create new user
      */
     $('body').on('click', '#buttonCreate', function (e) {
-        var inputElem = $('<div class="form-group"><label for="email">User ID / Display Name</label><input type="email" class="form-control" id="email" placeholder="User ID / Display Name"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
+        var inputElem = $('<div class="warning" style="height: 40px;"></div><div class="form-group"><label for="email">User ID / Display Name</label><input type="email" class="form-control" id="email" placeholder="User ID / Display Name"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
             btnCreate = $('<button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Add User</button>')
         $('#myModalLabel').empty();
         $('#myModalLabel').append('Create User');
@@ -154,7 +153,7 @@ $(document).ready(function () {
     });
 
     window.URL = window.URL || window.webkitURL;
-    $('#avatar_url').on("change", function () {
+    $('body').on("change", '#avatar_url', function () {
         var files = $(this).prop('files');
         for (var i = 0; i < files.length; i++) {
             const date = new Date(files[i].lastModified);
@@ -170,26 +169,26 @@ $(document).ready(function () {
         var userData = {
             email: $('#email').val() ? $('#email').val() : null,
             password: $('#password').val() ? $('#password').val() : null,
-            username: $('#username').val() ? $('#username').val() : null,
             avatar_url: null
         }
         var file_data = $('#avatar_url').prop('files')[0] ? $('#avatar_url').prop('files')[0] : "";
+        var url = '//dashboard-sample.herokuapp.com/api/upload';
 
         self.empty();
         self.css('background', '#F2994A');
         self.append("<span class='icon-loading icon-loading-white'></span> Creating User");
         self.addClass('disabled');
         if (file_data !== "") {
-            var form_data = new FormData();
-            form_data.append('file', file_data);
-            form_data.append('token', "ZBuqIoiAVNb87vrZyrgg")
+            var formData = new FormData();
+            formData.append('file', file_data);
+            formData.append('token', 'ZBuqIoiAVNb87vrZyrgg');
             $.ajax({
-                url: '//dashboard-sample.herokuapp.com/api/upload',
+                url: url,
                 type: 'POST',
                 dataType: 'json',
                 contentType: false,
                 processData: false,
-                data: form_data,
+                data: formData,
                 success: function (response) {
                     userData.avatar_url = response.results.file.url;
                     loginOrRegister(userData);
@@ -211,7 +210,7 @@ $(document).ready(function () {
             data: {
                 email: userData.email,
                 password: userData.password,
-                username: userData.username,
+                username: userData.email,
                 avatar_url: userData.avatar_url
             },
             headers: {
