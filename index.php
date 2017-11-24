@@ -58,7 +58,7 @@ $route->respond('POST', '/api/upload', function($request){
 $route->dispatch();
 
 function getContactList($page, $limit) {
-    $call = callHttp("/api/v2.1/rest/get_user_list", 'GET', [
+    $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', [
         [
             'name'=> 'page',
             'contents' => $page,
@@ -72,7 +72,7 @@ function getContactList($page, $limit) {
 }
 
 function uploadPhoto($file, $token, $filename) {
-    $photo = callHttp("/api/v2/mobile/upload", 'POST', [
+    $photo = callHttpPublic("/api/v2/mobile/upload", 'POST', [
         [
             'name' => 'file',
             'contents' => $file,
@@ -103,12 +103,30 @@ function callHttp($url, $method = 'GET', $params = []){
     return $httpResp->getBody();
 }
 
+function callHttpPublic($url, $method = 'GET', $params = []){
+    $base_url = 'https://' . getenv('APP_ID') . '.qiscus.com/';
+    try{
+        $client = new Client(['base_uri' => $base_url]);
+        $httpResp = $client->request($method, $url, [
+            'multipart' => $params,
+            'headers' => [
+                'Accept' => 'application/json',
+                'QISCUS_SDK_APP_ID' => getenv('APP_ID'),
+                'QISCUS_SDK_SECRET' => getenv('SECRET_KEY')
+            ]
+        ]);
+    } catch (GuzzleException $e){
+        return $e;
+    }
+    return $httpResp->getBody();
+}
+
 
 function redirectHttp($prefixUri) {
     if (isset($_SERVER["SERVER_PORT"])){
-        header('Location:http://'.$_SERVER['SERVER_NAME'].$prefixUri);
-    } else {
         header('Location:http://'.$_SERVER['SERVER_NAME'].":".$_SERVER['SERVER_PORT'].$prefixUri);
+    } else {
+        header('Location:http://'.$_SERVER['SERVER_NAME'].$prefixUri);
     }
     exit;
 }
