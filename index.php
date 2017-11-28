@@ -37,7 +37,7 @@ $route->respond('GET', '/api/contacts', function($request, $response){
     return $response->json($contacts);
 });
 
-$route->respond('GET', '/api/ios/contacts', function($request, $response){
+$route->respond('GET', '/api/mobile/contacts', function($request, $response){
     if(empty($request->page) || $request->page == 0 ) {
         $request->page = 1;
     }
