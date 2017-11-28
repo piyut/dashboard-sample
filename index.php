@@ -26,7 +26,7 @@ $route->respond('GET', '/login', function(){
     }
 });
 
-$route->respond('GET', '/api/contacts', function($request){
+$route->respond('GET', '/api/contacts', function($request, $response){
     if(empty($request->page) || $request->page == 0 ) {
         $request->page = 1;
     }
@@ -34,7 +34,24 @@ $route->respond('GET', '/api/contacts', function($request){
         $request->limit = 20;
     }
     $contacts = getContactList($request->page, $request->limit);
-    return $contacts;
+    return $response->json($contacts);
+});
+
+$route->respond('GET', '/api/ios/contacts', function($request, $response){
+    if(empty($request->page) || $request->page == 0 ) {
+        $request->page = 1;
+    }
+    if(empty($request->limit) || $request->limit == 0) {
+        $request->limit = 20;
+    }
+    $contacts = getContactListIos($request->page, $request->limit);
+    $payload = [];
+    $users= $contacts->results->users;
+    foreach ($users as $user) {
+        $prefix = strtolower(substr($user->username, 0, 1));
+        $payload[$prefix][] = $user;
+    }
+    return $response->json($payload);
 });
 
 $route->respond('POST', '/api/upload', function($request){
@@ -58,16 +75,48 @@ $route->respond('POST', '/api/upload', function($request){
 $route->dispatch();
 
 function getContactList($page, $limit) {
-    $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', [
-        [
-            'name'=> 'page',
-            'contents' => $page,
-        ], [
-            'name' => 'limit',
-            'contents' => $limit,
-        ]
-    ]);
-    header('Content-Type: application/json');
+    try {
+        $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', [
+            [
+                'name'=> 'page',
+                'contents' => $page,
+            ], [
+                'name' => 'limit',
+                'contents' => $limit,
+            ],
+        ]);
+        
+        return $call;
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+//    header('Content-Type: application/json');
+    return $call;
+}
+
+function getContactListIos($page, $limit) {
+    try {
+        $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', [
+            [
+                'name'=> 'page',
+                'contents' => $page,
+            ], [
+                'name' => 'limit',
+                'contents' => $limit,
+            ], [
+                'name' => 'order_query',
+                'contents' => 'email asc, created_at desc',
+            ], [
+                'name' => 'show_all',
+                'contents' => true,
+            ]
+        ]);
+        
+        return $call;
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+//    header('Content-Type: application/json');
     return $call;
 }
 
@@ -97,10 +146,11 @@ function callHttp($url, $method = 'GET', $params = []){
                 'QISCUS_SDK_SECRET' => $_COOKIE['SECRET_KEY']
             ]
         ]);
+        return json_decode($httpResp->getBody()->getContents());
     } catch (GuzzleException $e){
         return $e;
     }
-    return $httpResp->getBody();
+    
 }
 
 function callHttpPublic($url, $method = 'GET', $params = []){
@@ -115,10 +165,10 @@ function callHttpPublic($url, $method = 'GET', $params = []){
                 'QISCUS_SDK_SECRET' => getenv('SECRET_KEY')
             ]
         ]);
+        return json_decode($httpResp->getBody()->getContents());
     } catch (GuzzleException $e){
         return $e;
     }
-    return $httpResp->getBody();
 }
 
 
