@@ -44,14 +44,21 @@ $route->respond('GET', '/api/mobile/contacts', function($request, $response){
     if(empty($request->limit) || $request->limit == 0) {
         $request->limit = 20;
     }
+    // var_dump(preg_match("/^[a-zA-Z0-9]*$/",'ako('));
+    // return;
     $contacts = getContactListIos($request->page, $request->limit);
-    $payload = [];
+    $payload = array();
     $users= $contacts->results->users;
     foreach ($users as $user) {
         $prefix = strtolower(substr($user->username, 0, 1));
-        $payload[$prefix][] = $user;
+        if(preg_match("/^[a-zA-Z0-9]*$/",$prefix)) {
+            $payload[$prefix][] = $user;
+        }else {
+            $payload['0'][] = $user;
+        }
     }
-    return $response->json($payload);
+    ksort($payload);
+    return $response->json(['results'=>$payload]);
 });
 
 $route->respond('POST', '/api/upload', function($request){
