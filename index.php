@@ -72,7 +72,7 @@ function getContactList($page, $limit) {
 }
 
 function uploadPhoto($file, $token, $filename) {
-    $photo = callHttpPublic("/api/v2/mobile/upload", 'POST', [
+    $photo = callHttp("/api/v2/mobile/upload", 'POST', [
         [
             'name' => 'file',
             'contents' => $file,
