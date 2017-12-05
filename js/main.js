@@ -41,14 +41,14 @@ $(document).ready(function () {
 
     $('body').on('keyup change keypress', 'input,textarea', function () {
         var submit = $('#submitLogin')
-        if ($('input#appCode').val() != '' && $('input#secreetKey').val() != '') {
+        if ($('input#appID').val() != '' && $('input#secreetKey').val() != '') {
             submit.removeClass('disable')
         } else {
             submit.addClass('disable')
         }
     })
     $('body').on('click', '#submitLogin', function () {
-        dashboardSampleCookies.setItem('APP_ID', $('#appCode').val(), 31556926);
+        dashboardSampleCookies.setItem('APP_ID', $('#appID').val(), 31556926);
         dashboardSampleCookies.setItem('SECRET_KEY', $('#secreetKey').val(), 31556926);
         setTimeout(function () {
             location.reload()
@@ -57,9 +57,9 @@ $(document).ready(function () {
     var page = 1
         itemsPerPage = 10
         avatar = $('#avatar')
-        app_code = dashboardSampleCookies.getItem('APP_ID')
+        app_id = dashboardSampleCookies.getItem('APP_ID')
         secreet_key = dashboardSampleCookies.getItem('SECRET_KEY')
-        baseUrl = 'https://'+ app_code +'.qiscus.com'
+        baseUrl = 'https://'+ app_id +'.qiscus.com'
         secretKey = secreet_key
         warning = $('<img src="img/ic_warning.svg">')
 
