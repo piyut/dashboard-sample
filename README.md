@@ -29,10 +29,10 @@ Now you would have successfully run the sample dashboard. However, do note that 
 
 If you are wondering how our sample app with dashboard works, here are some illustrations:
 undefinedThere are 2 Server API that are used inside Qiscus Sample Dashboard:
-
+```
 1. .qiscus.com/api/v2.1/rest/get_user_list to get list of users from Qiscus SDK database, and
 2. .qiscus.com/api/v2/rest/login_or_register to enable user login or register via Sample Dashboard.
-
+```
 The Sample Dashboard called these APIs inside main.js file. To use these APIs, you need to pass your APP ID and  set method and request parameter.
 
 To pass the APP ID, If you login to Sample Dashboard with your own APP ID and Secret Key, the APP ID and Secret Key has been saved, so that you need nothing to setup APP ID inside main.js.  
