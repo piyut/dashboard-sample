@@ -1,4 +1,4 @@
-# Getting Started Sample Dashboard
+# Getting Started With Sample Dashboard
 
 If you have your own chat app, you may be wondering how you can manage your users. In this case, we provide a sample dashboard for user management. This sample dashboard can help you to figure out how to work with Qiscus Server Api for more advanced functionalities. You can go to https://www.qiscus.com/documentation/rest/list-api to know more about Server API.
 
