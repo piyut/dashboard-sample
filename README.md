@@ -25,9 +25,10 @@ The sample dashboard provided Client API to enable your sample app get list of u
 
 Now you would have successfully run the sample dashboard. However, do note that the sample app is running using our App ID. If you want the sample dashboard to be connected to your app with your own App ID, you need to change the App ID and Secret Key in the sample dashboard login page. You can find your own App ID and Secret Key in your own [Qiscus SDK dashboard](https://www.qiscus.com/dashboard).
 
-<p align="center"><br/><img src="https://quip.com/-/blob/RSXAAAKySwn/BReskZmWu4g4I5vF2yu0Ug"/><br/></p>
-
 If you are wondering how our sample app with dashboard works, here are some illustrations:
+
+![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
+
 undefinedThere are 2 Server API that are used inside Qiscus Sample Dashboard:
 ```
 1. .qiscus.com/api/v2.1/rest/get_user_list to get list of users from Qiscus SDK database, and
