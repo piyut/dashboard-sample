@@ -6,10 +6,10 @@ If you have your own chat app, you may be wondering how you can manage your user
 > Note: We assume that you have already downloaded the sample app. The sample app will be needed to work together with the sample dashboard.
 
 
-You can explore the sample dashboard http://dashboard-sample.herokuapp.com/login (https://dashboard-sample.herokuapp.com/) to try it online, or you also can download the source code to deploy it locally or to your own server.
+You can explore the [sample dashboard](http://dashboard-sample.herokuapp.com/login) to try it online, or you also can download the source code to deploy it locally or to your own server.
 
 To start trying the sample dashboard on your end, you should carry out the following steps:
-Clone sample dashboard in our github (https://github.com/qiscus/dashboard-sample), or just copy the following code.
+Clone sample dashboard in our [github](https://github.com/qiscus/dashboard-sample), or just copy the following code.
 ```
 git clone https://github.com/qiscus/dashboard-sample.git
 cd dashboard-sample
