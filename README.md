@@ -3,7 +3,7 @@
 If you have your own chat app, you may be wondering how you can manage your users. In this case, we provide a sample dashboard for user management. This sample dashboard can help you to figure out how to work with Qiscus Server Api for more advanced functionalities. You can go to https://www.qiscus.com/documentation/rest/list-api to know more about Server API.
 
 
-Note: We assume that you have already downloaded the sample app. The sample app will be needed to work together with the sample dashboard.
+> Note: We assume that you have already downloaded the sample app. The sample app will be needed to work together with the sample dashboard.
 
 
 You can explore the sample dashboard http://dashboard-sample.herokuapp.com/login (https://dashboard-sample.herokuapp.com/) to try it online, or you also can download the source code to deploy it locally or to your own server.
