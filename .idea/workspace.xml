@@ -21,8 +21,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="74" column="38" lean-forward="true" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+            <state relative-caret-position="152">
+              <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
               <folding>
                 <element signature="e#38#60#0#PHP" expanded="true" />
               </folding>
@@ -66,19 +66,7 @@
             <state relative-caret-position="2310">
               <caret line="154" column="42" lean-forward="false" selection-start-line="154" selection-start-column="42" selection-end-line="154" selection-end-column="42" />
               <folding>
-                <marker date="1511774313061" expanded="true" signature="30:14306" ph="{...}" />
                 <marker date="1511774313061" expanded="true" signature="10280:10343" ph="{&quot;email&quot;: userData.email...}" />
-                <marker date="1511774313061" expanded="true" signature="10280:10960" ph="{&quot;method&quot;: 'POST'...}" />
-                <marker date="1511774313061" expanded="true" signature="10280:10967" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="10366:10495" ph="{&quot;QISCUS_SDK_SECRET&quot;: secretKey...}" />
-                <marker date="1511774313061" expanded="true" signature="10568:10740" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="10661:10718" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="10778:10950" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="11062:12611" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="12618:12648" ph="/** update user ...*/" />
-                <marker date="1511774313061" expanded="true" signature="12711:14100" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="14056:14092" ph="{...}" />
-                <marker date="1511774313061" expanded="true" signature="14159:14303" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -114,6 +102,9 @@
       <find>getenv</find>
       <find>app_id</find>
       <find>u</find>
+      <find>/contacts1`</find>
+      <find>g</find>
+      <find>$data</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,7 +165,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -192,6 +182,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,15 +219,16 @@
       <workItem from="1511494059314" duration="4377000" />
       <workItem from="1511519206594" duration="28000" />
       <workItem from="1511774294493" duration="3096000" />
+      <workItem from="1512379949256" duration="13000" />
+      <workItem from="1512540733299" duration="300000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51607000" />
+    <option name="totallyTimeSpent" value="51920000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="170" y="88" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -245,7 +237,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41269842" sideWeight="0.49707174" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41269842" sideWeight="0.49707174" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -602,19 +594,7 @@
         <state relative-caret-position="2310">
           <caret line="154" column="42" lean-forward="false" selection-start-line="154" selection-start-column="42" selection-end-line="154" selection-end-column="42" />
           <folding>
-            <marker date="1511774313061" expanded="true" signature="30:14306" ph="{...}" />
             <marker date="1511774313061" expanded="true" signature="10280:10343" ph="{&quot;email&quot;: userData.email...}" />
-            <marker date="1511774313061" expanded="true" signature="10280:10960" ph="{&quot;method&quot;: 'POST'...}" />
-            <marker date="1511774313061" expanded="true" signature="10280:10967" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="10366:10495" ph="{&quot;QISCUS_SDK_SECRET&quot;: secretKey...}" />
-            <marker date="1511774313061" expanded="true" signature="10568:10740" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="10661:10718" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="10778:10950" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="11062:12611" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="12618:12648" ph="/** update user ...*/" />
-            <marker date="1511774313061" expanded="true" signature="12711:14100" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="14056:14092" ph="{...}" />
-            <marker date="1511774313061" expanded="true" signature="14159:14303" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -653,8 +633,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="74" column="38" lean-forward="true" selection-start-line="74" selection-start-column="38" selection-end-line="74" selection-end-column="38" />
+        <state relative-caret-position="152">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
           <folding>
             <element signature="e#38#60#0#PHP" expanded="true" />
           </folding>

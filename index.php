@@ -30,10 +30,14 @@ $route->respond('GET', '/api/contacts', function($request, $response){
     if(empty($request->page) || $request->page == 0 ) {
         $request->page = 1;
     }
+    $show_all=false;
+    if(!empty($request->show_all) && $request->show_all==true) {
+        $show_all = true;
+    }
     if(empty($request->limit) || $request->limit == 0) {
         $request->limit = 20;
     }
-    $contacts = getContactList($request->page, $request->limit);
+    $contacts = getContactList($request->page, $request->limit, $show_all);
     return $response->json($contacts);
 });
 
@@ -81,24 +85,29 @@ $route->respond('POST', '/api/upload', function($request){
 });
 $route->dispatch();
 
-function getContactList($page, $limit) {
+function getContactList($page, $limit, $show_all=false) {
+    $data = [
+        [
+            'name'=> 'page',
+            'contents' => $page,
+        ], [
+            'name' => 'limit',
+            'contents' => $limit,
+        ],
+    ];
+    if ($show_all==true) {
+        $data[] = [
+            'name' => 'show_all',
+            'contents' => true,
+        ];
+    }
     try {
-        $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', [
-            [
-                'name'=> 'page',
-                'contents' => $page,
-            ], [
-                'name' => 'limit',
-                'contents' => $limit,
-            ],
-        ]);
+        $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', $data);
         
         return $call;
     } catch (\Exception $e) {
         return $e->getMessage();
     }
-//    header('Content-Type: application/json');
-    return $call;
 }
 
 function getContactListIos($page, $limit) {
