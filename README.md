@@ -1,18 +1,3 @@
-# dashboard-sample
-To start with sample dashboard, you should do the following steps: clone sample dashboard [here](https://github.com/qiscus/dashboard-sample), or just copy the following code.
-
-git clone https://github.com/qiscus/dashboard-sample.git
-cd dashboard-sample
-
-Before running the sample app on your local, first, you need to install composer.
-```
-- composer install
-- php -S localhost:8000
-```
-
-Now you have successfully run the sample dashboard. But please be noted that the sample app is running using our App ID. If you want the sample dashboard to be connected to your app with your own App ID, you need to change App ID and Secret Key inside sample dashboard code. You can find your own App ID and Secret Key in your own Qiscus SDK dashboard.
-
-
 # Getting Started Sample Dashboard
 
 If you have your own chat app, you may be wondering how you can manage your users. In this case, we provide a sample dashboard for user management. This sample dashboard can help you to figure out how to work with Qiscus Server Api for more advanced functionalities. You can go to https://www.qiscus.com/documentation/rest/list-api to know more about Server API.
@@ -25,10 +10,10 @@ You can explore the sample dashboard http://dashboard-sample.herokuapp.com/login
 
 To start trying the sample dashboard on your end, you should carry out the following steps:
 Clone sample dashboard in our github (https://github.com/qiscus/dashboard-sample), or just copy the following code.
-
+```
 git clone https://github.com/qiscus/dashboard-sample.git
 cd dashboard-sample
-
+```
 Before running the sample app on your local, you need to first install composer. 
 ```
 composer install
@@ -38,7 +23,7 @@ php -S localhost:8000
 The sample dashboard provided Client API to enable your sample app get list of users. This API is based on PHP and used Composer as its dependency manager. Thus, you need to have PHP and composer installed to use the API.
 
 
-Now you would have successfully run the sample dashboard. However, do note that the sample app is running using our App ID. If you want the sample dashboard to be connected to your app with your own App ID, you need to change the App ID and Secret Key in the sample dashboard login page. You can find your own App ID and Secret Key in your own Qiscus SDK dashboard (https://www.qiscus.com/dashboard).
+Now you would have successfully run the sample dashboard. However, do note that the sample app is running using our App ID. If you want the sample dashboard to be connected to your app with your own App ID, you need to change the App ID and Secret Key in the sample dashboard login page. You can find your own App ID and Secret Key in your own [Qiscus SDK dashboard](https://www.qiscus.com/dashboard).
 
 <p align="center"><br/><img src="https://quip.com/-/blob/RSXAAAKySwn/BReskZmWu4g4I5vF2yu0Ug"/><br/></p>
 
@@ -52,13 +37,14 @@ The Sample Dashboard called these APIs inside main.js file. To use these APIs, y
 
 To pass the APP ID, If you login to Sample Dashboard with your own APP ID and Secret Key, the APP ID and Secret Key has been saved, so that you need nothing to setup APP ID inside main.js.  
 
-To set method and request parameter, you can refer to Qiscus Server API Documentation (https://www.qiscus.com/documentation/rest/list-api) on “Get User List” and “Login and Register” section.
+To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List” and “Login and Register” section.
 
 The Sample Dashboard also provided API for client app to get list of users from the Sample Dasboard. 
 To enable your client app to get list of users, you need to set your APP ID and Secret Key inside .env file. Then, you need to pass your domain name when calling the API.
-
+```
 //your-domain.com/api/contacts
 Example: //dashboard-sample.herokuapp.com/api/contacts
+```
 
 You will get the response as follow:
 ```
