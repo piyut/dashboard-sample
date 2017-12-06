@@ -31,10 +31,10 @@ If you are wondering how our sample app with dashboard works, here are some illu
 
 ![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
 
-undefinedThere are 2 Server API that are used inside Qiscus Sample Dashboard:
+There are 2 Server API that are used inside Qiscus Sample Dashboard:
 
-1. .qiscus.com/api/v2.1/rest/get_user_list to get list of users from Qiscus SDK database, and
-2. .qiscus.com/api/v2/rest/login_or_register to enable user login or register via Sample Dashboard.
+1. ```.qiscus.com/api/v2.1/rest/get_user_list``` to get list of users from Qiscus SDK database, and
+2. ```.qiscus.com/api/v2/rest/login_or_register``` to enable user login or register via Sample Dashboard.
 
 The Sample Dashboard called these APIs inside main.js file. To use these APIs, you need to pass your APP ID and  set method and request parameter.
 
