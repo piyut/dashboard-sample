@@ -1,4 +1,6 @@
-# Getting Started Sample Dashboard
+# Getting Started With Sample Dashboard
+
+![Dashboard Sample Page](https://github.com/qiscus/dashboard-sample/blob/master/img/1512532707-list+user.png)
 
 If you have your own chat app, you may be wondering how you can manage your users. In this case, we provide a sample dashboard for user management. This sample dashboard can help you to figure out how to work with Qiscus Server Api for more advanced functionalities. You can go to https://www.qiscus.com/documentation/rest/list-api to know more about Server API.
 
@@ -6,10 +8,10 @@ If you have your own chat app, you may be wondering how you can manage your user
 > Note: We assume that you have already downloaded the sample app. The sample app will be needed to work together with the sample dashboard.
 
 
-You can explore the sample dashboard http://dashboard-sample.herokuapp.com/login (https://dashboard-sample.herokuapp.com/) to try it online, or you also can download the source code to deploy it locally or to your own server.
+You can explore the [sample dashboard](http://dashboard-sample.herokuapp.com/login) to try it online, or you also can download the source code to deploy it locally or to your own server.
 
 To start trying the sample dashboard on your end, you should carry out the following steps:
-Clone sample dashboard in our github (https://github.com/qiscus/dashboard-sample), or just copy the following code.
+Clone sample dashboard in our [github](https://github.com/qiscus/dashboard-sample), or just copy the following code.
 ```
 git clone https://github.com/qiscus/dashboard-sample.git
 cd dashboard-sample
@@ -29,11 +31,11 @@ If you are wondering how our sample app with dashboard works, here are some illu
 
 ![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
 
-undefinedThere are 2 Server API that are used inside Qiscus Sample Dashboard:
-```
-1. .qiscus.com/api/v2.1/rest/get_user_list to get list of users from Qiscus SDK database, and
-2. .qiscus.com/api/v2/rest/login_or_register to enable user login or register via Sample Dashboard.
-```
+There are 2 Server API that are used inside Qiscus Sample Dashboard:
+
+1. ```.qiscus.com/api/v2.1/rest/get_user_list``` to get list of users from Qiscus SDK database, and
+2. ```.qiscus.com/api/v2/rest/login_or_register``` to enable user login or register via Sample Dashboard.
+
 The Sample Dashboard called these APIs inside main.js file. To use these APIs, you need to pass your APP ID and  set method and request parameter.
 
 To pass the APP ID, If you login to Sample Dashboard with your own APP ID and Secret Key, the APP ID and Secret Key has been saved, so that you need nothing to setup APP ID inside main.js.  
