@@ -8,7 +8,13 @@ $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
 $route = new \Klein\Klein();
-header("Access-Control-Allow-Origin: *");
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'POST') {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: X-Requested-With, content-type, access-control-allow-origin, access-control-allow-methods, access-control-allow-headers');
+    }
+    exit;
+}
 
 $route->respond('GET', '/', function(){
     if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
