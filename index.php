@@ -11,19 +11,7 @@ $route = new \Klein\Klein();
 header("Access-Control-Allow-Origin: *");
 
 $route->respond('GET', '/', function(){
-    if(isset($_COOKIE['APP_ID']) && isset($_COOKIE['SECRET_KEY'])){
-        require_once 'home.html';
-    } else {
-        redirectHttp("/login");
-    }
-});
-
-$route->respond('GET', '/login', function(){
-    if(!isset($_COOKIE['APP_ID']) && !isset($_COOKIE['SECRET_KEY'])){
-        require_once 'login.html';
-    } else {
-        redirectHttp("/");
-    }
+    require_once 'home.html';
 });
 
 $route->respond('GET', '/api/contacts', function($request, $response){
@@ -48,8 +36,6 @@ $route->respond('GET', '/api/mobile/contacts', function($request, $response){
     if(empty($request->limit) || $request->limit == 0) {
         $request->limit = 20;
     }
-    // var_dump(preg_match("/^[a-zA-Z0-9]*$/",'ako('));
-    // return;
     $contacts = getContactListIos($request->page, $request->limit);
     $payload = array();
     $users= $contacts->results->users;
@@ -103,7 +89,7 @@ function getContactList($page, $limit, $show_all=false) {
     }
     try {
         $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', $data);
-        
+
         return $call;
     } catch (\Exception $e) {
         return $e->getMessage();
@@ -127,17 +113,16 @@ function getContactListIos($page, $limit) {
                 'contents' => true,
             ]
         ]);
-        
+
         return $call;
     } catch (\Exception $e) {
         return $e->getMessage();
     }
-//    header('Content-Type: application/json');
     return $call;
 }
 
 function uploadPhoto($file, $token, $filename) {
-    $photo = callHttp("/api/v2/mobile/upload", 'POST', [
+    $photo = callHttpPublic("/api/v2/mobile/upload", 'POST', [
         [
             'name' => 'file',
             'contents' => $file,
@@ -166,7 +151,7 @@ function callHttp($url, $method = 'GET', $params = []){
     } catch (GuzzleException $e){
         return $e;
     }
-    
+
 }
 
 function callHttpPublic($url, $method = 'GET', $params = []){
@@ -186,7 +171,6 @@ function callHttpPublic($url, $method = 'GET', $params = []){
         return $e;
     }
 }
-
 
 function redirectHttp($prefixUri) {
     if (isset($_SERVER["SERVER_PORT"])){

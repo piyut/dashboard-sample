@@ -1,71 +1,14 @@
 $(document).ready(function () {
-    var dashboardSampleCookies = {
-        getItem: function (sKey) {
-          if (!sKey) { return null; }
-          return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
-        },
-        setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
-          if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-          var sExpires = "";
-          if (vEnd) {
-            switch (vEnd.constructor) {
-              case Number:
-                sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
-                break;
-              case String:
-                sExpires = "; expires=" + vEnd;
-                break;
-              case Date:
-                sExpires = "; expires=" + vEnd.toUTCString();
-                break;
-            }
-          }
-          document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
-          return true;
-        },
-        removeItem: function (sKey, sPath, sDomain) {
-          if (!this.hasItem(sKey)) { return false; }
-          document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
-          return true;
-        },
-        hasItem: function (sKey) {
-          if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
-          return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
-        },
-        keys: function () {
-          var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
-          for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
-          return aKeys;
-        }
-    };
-
-    $('body').on('keyup change keypress', 'input,textarea', function () {
-        var submit = $('#submitLogin')
-        if ($('input#appID').val() != '' && $('input#secreetKey').val() != '') {
-            submit.removeClass('disable')
-        } else {
-            submit.addClass('disable')
-        }
-    })
-    $('body').on('click', '#submitLogin', function () {
-        dashboardSampleCookies.setItem('APP_ID', $('#appID').val(), 31556926);
-        dashboardSampleCookies.setItem('SECRET_KEY', $('#secreetKey').val(), 31556926);
-        setTimeout(function () {
-            location.reload()
-        }, 1000);
-    })
     var page = 1
         itemsPerPage = 10
         avatar = $('#avatar')
-        app_id = dashboardSampleCookies.getItem('APP_ID')
-        secreet_key = dashboardSampleCookies.getItem('SECRET_KEY')
-        baseUrl = 'https://'+ app_id +'.qiscus.com'
-        secretKey = secreet_key
+        // baseUrl = '//localhost:8888'
+        baseUrl = '//dashboard-sample.herokuapp.com'
         warning = $('<img src="img/ic_warning.svg">')
 
     getUsers = {
         getDataFromApi: function (page) {
-            var url = baseUrl + '/api/v2.1/rest/get_user_list';
+            var url = baseUrl + '/api/contacts';
             $("<div class='box-loading'><span class='icon-loading'></span> LOADING</div>").appendTo( ('.box-table') );
 
             $.ajax({
@@ -74,10 +17,6 @@ $(document).ready(function () {
                 data: {
                     limit: itemsPerPage,
                     page: page
-                },
-                headers: {
-                    QISCUS_SDK_SECRET: secretKey,
-                    'Content-Type':'application/x-www-form-urlencoded'
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -172,7 +111,7 @@ $(document).ready(function () {
             avatar_url: null
         }
         var file_data = $('#avatar_url').prop('files')[0] ? $('#avatar_url').prop('files')[0] : "";
-        var url = '//dashboard-sample.herokuapp.com/api/upload';
+        var url = baseUrl + '/api/upload';
 
         self.empty();
         self.css('background', '#F2994A');
@@ -278,10 +217,4 @@ $(document).ready(function () {
             checkForm();
         });
     });
-
-    $('body').on('click', '#buttonLogout', function () {
-        dashboardSampleCookies.removeItem('APP_ID');
-        dashboardSampleCookies.removeItem('SECRET_KEY');
-        location.reload();
-    })
 })
