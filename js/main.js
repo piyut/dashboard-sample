@@ -2,8 +2,7 @@ $(document).ready(function () {
     var page = 1
         itemsPerPage = 10
         avatar = $('#avatar')
-        baseUrl = '//localhost:8888'
-        // baseUrl = '//dashboard-sample.herokuapp.com'
+        baseUrl = '//dashboard-sample.herokuapp.com'
         warning = $('<img src="img/ic_warning.svg">')
 
     getUsers = {
