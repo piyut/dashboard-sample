@@ -8,7 +8,13 @@ $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
 $route = new \Klein\Klein();
-header("Access-Control-Allow-Origin: *");
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'POST') {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: X-Requested-With, content-type, access-control-allow-origin, access-control-allow-methods, access-control-allow-headers');
+    }
+    exit;
+}
 
 $route->respond('GET', '/', function(){
     require_once 'home.html';
@@ -69,6 +75,21 @@ $route->respond('POST', '/api/upload', function($request){
         return $e->getMessage();
     }
 });
+
+$route->respond('POST', '/web/login_or_register', function($request, $response){
+    if (empty($request->username)) {
+        header('Content-Type: application/json', true, 400);
+        return json_encode(['username'=>'required']);
+    }
+    if (empty($request->email)) {
+        header('Content-Type: application/json', true, 400);
+        return json_encode(['email'=>'required']);
+    }
+    $login = loginOrRegister($request->email, $request->password, $request->username);
+    header('Content-Type: application/json', true, 200);
+    return $response->json(['results'=>$login]);
+});
+
 $route->dispatch();
 
 function getContactList($page, $limit, $show_all=false) {
@@ -89,6 +110,27 @@ function getContactList($page, $limit, $show_all=false) {
     }
     try {
         $call = callHttpPublic("/api/v2.1/rest/get_user_list", 'GET', $data);
+
+        return $call;
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+}
+
+function loginOrRegister($email, $password, $username) {
+    try {
+        $call = callHttpPublic("/api/v2/rest/login_or_register", 'POST', [
+            [
+                'name'=> 'email',
+                'contents' => $email,
+            ], [
+                'name' => 'password',
+                'contents' => $password,
+            ], [
+                'name' => 'username',
+                'contents' => $username,
+            ],
+        ]);
 
         return $call;
     } catch (\Exception $e) {
