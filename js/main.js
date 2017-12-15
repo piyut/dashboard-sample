@@ -2,8 +2,8 @@ $(document).ready(function () {
     var page = 1
         itemsPerPage = 10
         avatar = $('#avatar')
-        // baseUrl = '//localhost:8888'
-        baseUrl = '//dashboard-sample.herokuapp.com'
+        baseUrl = '//localhost:8888'
+        // baseUrl = '//dashboard-sample.herokuapp.com'
         warning = $('<img src="img/ic_warning.svg">')
 
     getUsers = {
@@ -143,18 +143,13 @@ $(document).ready(function () {
 
     function loginOrRegister(userData) {
         $.ajax({
-            url: baseUrl + '/api/v2/rest/login_or_register',
-            method: 'POST',
+            url: baseUrl + '/api/login_or_register',
             type: 'POST',
             data: {
                 email: userData.email,
                 password: userData.password,
                 username: userData.email,
                 avatar_url: userData.avatar_url
-            },
-            headers: {
-                QISCUS_SDK_SECRET: secretKey,
-                'Content-Type': 'application/x-www-form-urlencoded'
             },
             dataType: 'json',
             success: function (response) {

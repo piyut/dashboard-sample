@@ -76,7 +76,7 @@ $route->respond('POST', '/api/upload', function($request){
     }
 });
 
-$route->respond('POST', '/web/login_or_register', function($request, $response){
+$route->respond('POST', '/api/login_or_register', function($request, $response){
     if (empty($request->username)) {
         header('Content-Type: application/json', true, 400);
         return json_encode(['username'=>'required']);
@@ -85,7 +85,7 @@ $route->respond('POST', '/web/login_or_register', function($request, $response){
         header('Content-Type: application/json', true, 400);
         return json_encode(['email'=>'required']);
     }
-    $login = loginOrRegister($request->email, $request->password, $request->username);
+    $login = loginOrRegister($request->email, $request->password, $request->username, $request->avatar_url);
     header('Content-Type: application/json', true, 200);
     return $response->json(['results'=>$login]);
 });
@@ -117,7 +117,7 @@ function getContactList($page, $limit, $show_all=false) {
     }
 }
 
-function loginOrRegister($email, $password, $username) {
+function loginOrRegister($email, $password, $username, $avatar_url) {
     try {
         $call = callHttpPublic("/api/v2/rest/login_or_register", 'POST', [
             [
@@ -129,7 +129,10 @@ function loginOrRegister($email, $password, $username) {
             ], [
                 'name' => 'username',
                 'contents' => $username,
-            ],
+            ], [
+                'name' => 'avatar_url',
+                'contents' => $avatar_url,
+            ]
         ]);
 
         return $call;
