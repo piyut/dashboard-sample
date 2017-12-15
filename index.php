@@ -57,7 +57,7 @@ $route->respond('GET', '/api/mobile/contacts', function($request, $response){
     return $response->json(['results'=>$payload]);
 });
 
-$route->respond('POST', '/api/upload', function($request){
+$route->respond('POST', '/api/upload', function($request, $response){
     if(empty($_FILES['file']['tmp_name'])){
         header('Content-Type: application/json', true, 400);
         return json_encode(['file'=>'required']);
@@ -70,7 +70,7 @@ $route->respond('POST', '/api/upload', function($request){
     try {
         header('Content-Type: application/json', true, 200);
         $file = uploadPhoto($handle, $request->token, $_FILES['file']['name']);
-        return $file;
+        return $response->json($file);
     } catch (\Exception $e) {
         return $e->getMessage();
     }
