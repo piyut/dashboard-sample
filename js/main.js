@@ -40,10 +40,10 @@ $(document).ready(function () {
             $("<span> ("+ data.results.meta.total_data +")</span>").appendTo( ('.box-title > h3 > .total-user') );
             $.each(data.results.users, function (index, val) {
                 var key = ((page - 1) * itemsPerPage) + (index + 1);
-                    username = val.username ? val.username : '-'
+                    username = val.username ? val.username.replace(/ /g,"-") : '-'
                     createDate = DateFormat.format.date(val.created_at, 'dd/MM/yyyy HH:mm:ss')
                     updateDate = DateFormat.format.date(val.updated_at, 'dd/MM/yyyy HH:mm:ss')
-                $("<tr data-name="+ username +" data-email="+ val.email +" data-create-date="+ val.created_at +" data-update-date="+ val.updated_at +" data-value="+ val.id +"><th class='text-center' scope='row'>" + key + "</th><td><img style='margin-right: 10px;' class='img-circle' width='48' height='48' src=" + val.avatar_url + ">" + val.email + "</td><td>" + createDate + "</td><td>" + updateDate + "</td><td class='text-center'><a href='#' class='button-action button-update-user'><img src='img/ic_pencil.svg' width='18' height='18' alt='view'></a><a href='#' class='button-action button-view-user'><img src='img/ic_eye.svg' width='18' height='18' alt='view'></a></td></tr>").appendTo( ('tbody') );
+                $('<tr data-name='+ username +' data-email='+ val.email +' data-create-date='+ val.created_at +' data-update-date='+ val.updated_at +' data-value='+ val.id +'><th class="text-center" scope="row">' + key + '</th><td><img style="margin-right: 10px;" class="img-circle" width="48" height="48" src=' + val.avatar_url + '>' + val.email + '</td><td>' + createDate + '</td><td>' + updateDate + '</td><td class="text-center"><a href="#" class="button-action button-update-user"><img src="img/ic_pencil.svg" width="18" height="18" alt="view"></a><a href="#" class="button-action button-view-user"><img src="img/ic_eye.svg" width="18" height="18" alt="view"></a></td></tr>').appendTo( ('tbody') );
             });
             $('#pagination').twbsPagination({
                 totalPages: Math.ceil(data.results.meta.total_data / itemsPerPage),
@@ -52,7 +52,7 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $("<tr></tr><tr><td colspan='5' class='text-center'><div class='icon-empty-user'></div><div class='info-empty'>User Data Not Found</div><div class='instruction-empty'>You can add user to use it on your app that using Qiscus SDK</div><div><button type='button' class='btn btn-default' data-toggle='modal' data-target='#createUserModal'><span class='icon-user'></span> Add User </button></div></td></tr>").appendTo( ('tbody') );
+            $("<tr></tr><tr><td colspan='5' class='text-center'><div class='icon-empty-user'></div><div class='info-empty'>User Data Not Found</div><div class='instruction-empty'>You can add user to use it on your app that using Qiscus SDK</div><div><button type='button' class='btn btn-default' data-toggle='modal' data-target='#userModal'><span class='icon-user'></span> Add User </button></div></td></tr>").appendTo( ('tbody') );
         }
     }
 
@@ -61,7 +61,7 @@ $(document).ready(function () {
      */
     var checkForm = function() {
         return $('input,textarea').on('keyup change keypress', function () {
-            var send        = $('#buttonCreateUser')
+            var send        = $('#buttonSubmitUser')
             if ($('input#email').val() != '' && $('input#password').val() != '') {
                 send.removeClass('disable')
             } else {
@@ -75,7 +75,7 @@ $(document).ready(function () {
      */
     $('body').on('click', '#buttonCreate', function (e) {
         var inputElem = $('<div class="warning" style="height: 40px;"></div><div class="form-group"><label for="email">User ID / Display Name</label><input type="email" class="form-control" id="email" placeholder="User ID / Display Name"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
-            btnCreate = $('<button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Add User</button>')
+            btnCreate = $('<button id="buttonSubmitUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Add User</button>')
         $('#myModalLabel').empty();
         $('#myModalLabel').append('Create User');
         $('#avatar').attr('src', 'img/ic_default_avatar.svg');
@@ -85,7 +85,7 @@ $(document).ready(function () {
         $('.modal-footer').empty();
         inputElem.appendTo(('.box-input'));
         btnCreate.appendTo(('.modal-footer'));
-        $.when( $('#createUserModal').modal('show') ).done(function() {
+        $.when( $('#userModal').modal('show') ).done(function() {
             checkForm();
         });
     });
@@ -102,10 +102,11 @@ $(document).ready(function () {
         }
     })
 
-    $('body').on('click', '#buttonCreateUser', function () {
-        var self = $('#buttonCreateUser');
+    $('body').on('click', '#buttonSubmitUser', function () {
+        var self = $('#buttonSubmitUser');
         var userData = {
             email: $('#email').val() ? $('#email').val() : null,
+            username: $('#username').val() ? $('#username').val() : null,
             password: $('#password').val() ? $('#password').val() : null,
             avatar_url: null
         }
@@ -129,14 +130,22 @@ $(document).ready(function () {
                 data: formData,
                 success: function (response) {
                     userData.avatar_url = response.results.file.url;
-                    loginOrRegister(userData);
+                    if (self.data('value') === "update") {
+                        updateUserProfile(userData);
+                    } else {
+                        loginOrRegister(userData);
+                    }
                 },
                 error: function (error) {
                     console.log(error);
                 }
             })
         } else {
-            loginOrRegister(userData);
+            if (self.data('value') === "update") {
+                updateUserProfile(userData);
+            } else {
+                loginOrRegister(userData);
+            }
         }
     });
 
@@ -152,7 +161,33 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (response) {
-                $('#createUserModal').modal('hide')
+                $('#userModal').modal('hide')
+                setTimeout(function () {
+                    location.reload()
+                }, 1000);
+            },
+            error: function (error) {
+                console.log(error);
+                self.empty();
+                self.append('Add User')
+                self.css('background', '#2ACB6E');
+            }
+        })
+    }
+
+    function updateUserProfile(userData) {
+        $.ajax({
+            url: baseUrl + '/api/update_profile',
+            type: 'POST',
+            data: {
+                email: userData.email,
+                password: userData.password,
+                name: userData.username,
+                avatar_url: userData.avatar_url
+            },
+            dataType: 'json',
+            success: function (response) {
+                $('#userModal').modal('hide')
                 setTimeout(function () {
                     location.reload()
                 }, 1000);
@@ -170,8 +205,7 @@ $(document).ready(function () {
      * view user
      */
     $('body').on('click', '.button-view-user', function (e) {
-        console.log($(this).closest('tr').data("options"));
-        var name = $(this).closest('tr').data("name")
+        var name = $(this).closest('tr').data("name").replace(/-/g," ")
             email = $(this).closest('tr').data("email")
             createDate = DateFormat.format.date($(this).closest('tr').data("createDate"), 'dd/MM/yyyy')
             createTime = DateFormat.format.date($(this).closest('tr').data("createDate"), 'HH:mm:ss')
@@ -187,17 +221,17 @@ $(document).ready(function () {
         $('.modal-footer').empty();
         inputElem.appendTo(('.box-input'));
         btnClose.appendTo(('.modal-footer'));
-        $('#createUserModal').modal();
+        $('#userModal').modal();
     })
 
     /**
      * update user
      */
     $('body').on('click', '.button-update-user', function (e) {
-        var name = $(this).closest('tr').data("name")
+        var name = $(this).closest('tr').data("name").replace(/-/g," ")
             email = $(this).closest('tr').data("email")
-            inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" value='+ email +' placeholder="User ID"></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" value='+ name +' placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
-            btnUpdate = $('<button id="buttonCreateUser" type="button" class="btn btn-default disable"><span class="icon-user"></span> Update User</button>')
+            inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" placeholder="User ID"></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
+            btnUpdate = $('<button id="buttonSubmitUser" data-value="update" type="button" class="btn btn-default"><span class="icon-user"></span> Update User</button>')
         $('#myModalLabel').empty();
         $('#myModalLabel').append('Update User');
         $('#avatar').attr('src', $(this).closest('tr').find('img.img-circle').attr('src'));
@@ -207,8 +241,8 @@ $(document).ready(function () {
         $('.modal-footer').empty();
         inputElem.appendTo(('.box-input'));
         btnUpdate.appendTo(('.modal-footer'));
-        $.when( $('#createUserModal').modal('show') ).done(function() {
-            checkForm();
-        });
+        $('#email').val(email)
+        $('#username').val(name)
+        $('#userModal').modal('show')
     });
 })

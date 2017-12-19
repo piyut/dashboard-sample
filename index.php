@@ -91,6 +91,16 @@ $route->respond('POST', '/api/login_or_register', function($request, $response){
     return $response->json(['results'=>$login]);
 });
 
+$route->respond('POST', '/api/update_profile', function($request, $response){
+    if (empty($request->email)) {
+        header('Content-Type: application/json', true, 400);
+        return json_encode(['email'=>'required']);
+    }
+    $updateUser = updateUserProfile($request->email, $request->password, $request->name, $request->avatar_url);
+    header('Content-Type: application/json', true, 200);
+    return $response->json(['results'=>$updateUser]);
+});
+
 $route->dispatch();
 
 function getContactList($page, $limit, $show_all=false) {
@@ -179,6 +189,30 @@ function uploadPhoto($file, $token, $filename) {
         ]
     ]);
     return $photo;
+}
+
+function updateUserProfile($email, $password, $name, $avatar_url) {
+    try {
+        $call = callHttpPublic("/api/v2/rest/update_profile", 'POST', [
+            [
+                'name'=> 'email',
+                'contents' => $email,
+            ], [
+                'name' => 'password',
+                'contents' => $password,
+            ], [
+                'name' => 'name',
+                'contents' => $name,
+            ], [
+                'name' => 'avatar_url',
+                'contents' => $avatar_url,
+            ]
+        ]);
+
+        return $call;
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
 }
 
 function callHttp($url, $method = 'GET', $params = []){
