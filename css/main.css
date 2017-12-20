@@ -242,6 +242,10 @@ body{
     font-size: 16px;
     padding: 0;
 }
+.form-control[readonly]{
+    background-color: #fff;
+    opacity: 0.6;
+}
 /* end modal */
 /* footer */
 footer{

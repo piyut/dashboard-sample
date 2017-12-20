@@ -230,7 +230,7 @@ $(document).ready(function () {
     $('body').on('click', '.button-update-user', function (e) {
         var name = $(this).closest('tr').data("name").replace(/-/g," ")
             email = $(this).closest('tr').data("email")
-            inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" placeholder="User ID"></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
+            inputElem = $('<div class="form-group"><label for="email">User ID</label><input type="email" class="form-control" id="email" placeholder="User ID" readonly></div><div class="form-group"><label for="username">Display Name</label><input type="text" class="form-control" id="username" placeholder="username"></div><div class="form-group"><label for="password">Password</label><input type="password" class="form-control" id="password" placeholder="Password"></div>');
             btnUpdate = $('<button id="buttonSubmitUser" data-value="update" type="button" class="btn btn-default"><span class="icon-user"></span> Update User</button>')
         $('#myModalLabel').empty();
         $('#myModalLabel').append('Update User');
