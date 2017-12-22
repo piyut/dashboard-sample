@@ -38,12 +38,10 @@ There are 2 Server API that are used inside Qiscus Sample Dashboard:
 
 The Sample Dashboard called these APIs inside main.js file. To use these APIs, you need to pass your APP ID and  set method and request parameter.
 
-To pass the APP ID, If you login to Sample Dashboard with your own APP ID and Secret Key, the APP ID and Secret Key has been saved, so that you need nothing to setup APP ID inside main.js.  
+If you want to run you Sample Dashboard with your own APP ID, you need to change the APP ID and Secret Key in *.ENV* file and put your own Sample Dashboard URL in the variable `baseURL` inside *main.js* file.
 
 To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List” and “Login and Register” section.
 
-The Sample Dashboard also provided API for client app to get list of users from the Sample Dasboard. 
-To enable your client app to get list of users, you need to set your APP ID and Secret Key inside .env file. Then, you need to pass your domain name when calling the API.
 ```
 //your-domain.com/api/contacts
 Example: //dashboard-sample.herokuapp.com/api/contacts
