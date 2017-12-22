@@ -31,11 +31,12 @@ If you are wondering how our sample app with dashboard works, here are some illu
 
 ![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
 
-There are 3 Server API that are used inside Qiscus Sample Dashboard:
+There are 3 API that are provided inside Qiscus Sample Dashboard:
 
-1. ```.localhost:8000/api/contacts``` to get list of users.
+1. ```.localhost:8000/api/contacts``` to get list of users for web.
 2. ```.localhost:8000/api/login_or_register``` to enable user login or register.
 3. ```.localhost:8000/api/update_profile``` to update user profile.
+4.  ```.localhost:8000/api/mobile/contacts``` to get list of users for mobile app (Android and iOS).
 
 The Sample Dashboard called these APIs inside index.php file. To use these APIs, you need to pass your APP ID, Secret Key inside file .env.
 > Note: if you need add more api you want, you just adding in the file index.php
@@ -46,8 +47,8 @@ You need pass var baseUrl inside main.js:
 
 To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List”, “Update User Profile” and “Login and Register” section.
 
-The Sample Dashboard also provided API for (android, ios) client app to get list of users from the Sample Dasboard.
-To enable your (android, ios) client app to get list of users, you need to pass your domain name when calling the API.
+The Sample Dashboard also provided API for (Android and iOS) client app to get list of users from the Sample Dasboard.
+To enable your (Android and iOS) client app to get list of users, you need to pass your domain name when calling the API.
 ```
 //your-domain.com/api/mobile/contacts
 Example: //dashboard-sample.herokuapp.com/api/mobile/contacts
