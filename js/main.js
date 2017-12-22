@@ -3,7 +3,6 @@ $(document).ready(function () {
         itemsPerPage = 10
         avatar = $('#avatar')
         baseUrl = '//dashboard-sample.herokuapp.com'
-        warning = $('<img src="img/ic_warning.svg">')
 
     getUsers = {
         getDataFromApi: function (page) {

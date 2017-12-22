@@ -16,7 +16,7 @@ Clone sample dashboard in our [github](https://github.com/qiscus/dashboard-sampl
 git clone https://github.com/qiscus/dashboard-sample.git
 cd dashboard-sample
 ```
-Before running the sample app on your local, you need to first install composer. 
+Before running the sample app on your local, you need to first install composer.
 ```
 composer install
 php -S localhost:8000
@@ -31,22 +31,26 @@ If you are wondering how our sample app with dashboard works, here are some illu
 
 ![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
 
-There are 2 Server API that are used inside Qiscus Sample Dashboard:
+There are 3 Server API that are used inside Qiscus Sample Dashboard:
 
-1. ```.qiscus.com/api/v2.1/rest/get_user_list``` to get list of users from Qiscus SDK database, and
-2. ```.qiscus.com/api/v2/rest/login_or_register``` to enable user login or register via Sample Dashboard.
+1. ```.localhost:8000/api/contacts``` to get list of users.
+2. ```.localhost:8000/api/login_or_register``` to enable user login or register.
+3. ```.localhost:8000/api/update_profile``` to update user profile.
 
-The Sample Dashboard called these APIs inside main.js file. To use these APIs, you need to pass your APP ID and  set method and request parameter.
+The Sample Dashboard called these APIs inside index.php file. To use these APIs, you need to pass your APP ID, Secret Key inside file .env.
+> Note: if you need add more api you want, you just adding in the file index.php
 
-To pass the APP ID, If you login to Sample Dashboard with your own APP ID and Secret Key, the APP ID and Secret Key has been saved, so that you need nothing to setup APP ID inside main.js.  
+You need pass var baseUrl inside main.js:
 
-To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List” and “Login and Register” section.
+```var baseUrl = "localhost:8000"```
 
-The Sample Dashboard also provided API for client app to get list of users from the Sample Dasboard. 
-To enable your client app to get list of users, you need to set your APP ID and Secret Key inside .env file. Then, you need to pass your domain name when calling the API.
+To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List”, “Update User Profile” and “Login and Register” section.
+
+The Sample Dashboard also provided API for (android, ios) client app to get list of users from the Sample Dasboard.
+To enable your (android, ios) client app to get list of users, you need to pass your domain name when calling the API.
 ```
-//your-domain.com/api/contacts
-Example: //dashboard-sample.herokuapp.com/api/contacts
+//your-domain.com/api/mobile/contacts
+Example: //dashboard-sample.herokuapp.com/api/mobile/contacts
 ```
 
 You will get the response as follow:
