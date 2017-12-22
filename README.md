@@ -36,7 +36,7 @@ There are 3 API that are provided inside Qiscus Sample Dashboard:
 1. ```.//localhost:8000/api/contacts``` to get list of users for web.
 2. ```.//localhost:8000/api/login_or_register``` to enable user login or register.
 3. ```.//localhost:8000/api/update_profile``` to update user profile.
-4.  ```.//localhost:8000/api/mobile/contacts``` to get list of users for mobile app (Android and iOS).
+4. ```.//localhost:8000/api/mobile/contacts``` to get list of users for mobile app (Android and iOS).
 
 The Sample Dashboard called these APIs inside index.php file. To use these APIs, you need to pass your APP ID, Secret Key inside file .env.
 > Note: if you need add more api you want, you just adding in the file index.php
