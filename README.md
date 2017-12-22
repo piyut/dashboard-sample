@@ -31,7 +31,7 @@ If you are wondering how our sample app with dashboard works, here are some illu
 
 ![Image of Dashboard Sample](https://github.com/qiscus/dashboard-sample/blob/master/1511248325-How%2Bsample%2Bwork.png)
 
-There are 3 API that are provided inside Qiscus Sample Dashboard:
+There are 4 API that are provided inside Qiscus Sample Dashboard:
 
 1. ```.localhost:8000/api/contacts``` to get list of users for web.
 2. ```.localhost:8000/api/login_or_register``` to enable user login or register.
@@ -41,9 +41,9 @@ There are 3 API that are provided inside Qiscus Sample Dashboard:
 The Sample Dashboard called these APIs inside index.php file. To use these APIs, you need to pass your APP ID, Secret Key inside file .env.
 > Note: if you need add more api you want, you just adding in the file index.php
 
-You need pass var baseUrl inside main.js:
+You need pass var baseUrl inside main.js file which is located in /js folder:
 
-```var baseUrl = "localhost:8000"```
+```var baseUrl = "http://localhost:8000"```
 
 To set method and request parameter, you can refer to [Qiscus Server API Documentation](https://www.qiscus.com/documentation/rest/list-api) on “Get User List”, “Update User Profile” and “Login and Register” section.
 
@@ -77,3 +77,5 @@ You will get the response as follow:
    "status":200
 }
 ```
+
+> Make sure your changes reflect in the browser, because sometime the JS file will be cached by browser or network. You can also make sure by change different port of server in the browser to check the changes you made in static file
